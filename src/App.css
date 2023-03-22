@@ -1,0 +1,9 @@
+* {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+:root {
+  --themeRed: #893d34;
+  --themeBlue: #444d66;
+  --themeWhite: white;
+}
