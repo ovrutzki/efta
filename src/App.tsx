@@ -12,9 +12,13 @@ const theme = mui.createTheme({
     },
     secondary: {
       main: "#444d66",
-    },
+    }
   },
-});
+  typography: {
+    button: {
+      textTransform: 'none'
+    }
+}});
 
 function App() {
   return (

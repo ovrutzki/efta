@@ -1,6 +1,5 @@
 import React from "react";
 import { Box } from "@mui/material";
-import * as icons from "@mui/icons-material";
 import * as mui from "@mui/material";
 
 const UserNavBar: React.FC = () => {
@@ -12,20 +11,30 @@ const UserNavBar: React.FC = () => {
         display: "flex",
         position: "sticky",
         alignItems: "center",
-        justifyContent: "space-around",
+        justifyContent: "space-between",
+        px:"30px"
       }}
     >
 
-      <mui.IconButton color="primary" >
-        <icons.MenuRounded sx={{fontSize:"40px", color:"primary.light"}}/>
-      </mui.IconButton>
-      
-      <mui.Typography variant="h4">Home</mui.Typography>
+      <Box sx={{width:"40px",height:"40px", border:" 1px green solid"}}>MENU</Box>
 
-      <mui.Button><img src="./assets/logo/logo.svg"></img></mui.Button>
+      <mui.Typography variant="h4" sx={{position:"absolute", right:"50%", transform:"translate(50%)"}}>HOME</mui.Typography>
+
+      <mui.Button
+  sx={{
+    borderRadius:"15px",
+    ".MuiTouchRipple-child": {
+      backgroundColor: "#0080ff69"
+    },'&:hover': { backgroundColor: 'transparent' }
+
+  }}
+>
+  <img src="./assets/logo/logo.svg" alt="Logo" />
+</mui.Button>
+
 
     </Box>
-    
+
   );
 };
 
