@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as mui from "@mui/material";
 import { Button, Divider } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -6,7 +6,12 @@ import SideBar from "../SideBar/SideBar";
 
 const AdminSetting: React.FC = () => {
   const [settingSection, setSettingSection] = useState<string>("");
+  const [studentInput, setStudentInput] = useState<string>("");
+  const [studentArray,setStudentArray] = useState<string[]>([])
 
+  useEffect(()=>{
+    
+  },[studentInput])
   return (
     <>
       <mui.Box sx={{ display: "flex", justifyContent: "center", m: 1 }}>
@@ -65,7 +70,14 @@ const AdminSetting: React.FC = () => {
               <mui.FormControl sx={{ gap: 2 }}>
                 <mui.TextField label="Course Name" variant="outlined" />
                 <mui.TextField label="Class room link" variant="outlined" />
-                <mui.TextField label="Student Email" variant="outlined" />
+                <mui.Box>
+                <mui.TextField onChange={(e) => setStudentInput(e.target.value)} name="student-email" label="Student Email" variant="outlined" />
+                <mui.Button onClick={() => setStudentArray(prevArray => [...prevArray, studentInput])}>+</mui.Button>
+                </mui.Box>
+                {studentArray.map((stu) => <mui.Typography>{stu}</mui.Typography>)}
+                <mui.Box>
+
+                </mui.Box>
                 <mui.Button type="submit">Submit</mui.Button>
               </mui.FormControl>
             )}
