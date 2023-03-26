@@ -156,9 +156,9 @@ const UpperUserCalendar: React.FC = () => {
       {/* Day scrolling picker */}
       {/* <Box sx={{ height: "110px",display:"fixed", gap:"6px", px:"5px", alignItems:"start", overflow:"scroll", */}
       <Box sx={{ height: "110px",display:"fixed", px:"5px", alignItems:"start", overflow:"scroll",
-      // '::-webkit-scrollbar': {
-      //     display: 'none',
-      //   }
+      '::-webkit-scrollbar': {
+          display: 'none',
+        }
         }}>
         {/* {daysArray.map((day)=>{ */}
         {[[1,"er"],[2,"er"],[3,"er"]].map((day)=>{
