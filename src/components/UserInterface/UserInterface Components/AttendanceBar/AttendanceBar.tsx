@@ -32,13 +32,12 @@ const handleClickOpen = () => {
     ) => {
         if (reason !== "backdropClick") {
             setOpen(false);
-
-
     }
   };
 
   useEffect(()=>{
-    setSliderValue(-1);
+    if (selectedAttendance === "on_time" || selectedAttendance === "not_today"){
+    setSliderValue(-1);}
 
   },[selectedAttendance]
   )
@@ -84,6 +83,7 @@ const handleClickOpen = () => {
     <Button
           onClick={()=>{
             setSelectedAttendance("ill_be_late")
+            setSliderValue(0.5)
             handleClickOpen()
           }}
           variant="contained"
@@ -96,7 +96,7 @@ const handleClickOpen = () => {
             "&:hover": { backgroundColor: selectedAttendance === "ill_be_late" ? "#EAD87B"  :"#ead87b3b" },
           }}>
               <img src="./assets/Icons/attendanceBar/hurry_icon.svg" />
-{sliderValue <= 0 ? (
+{sliderValue < 0 ? (
   <>
     {"I'll be late"}
   </>
@@ -111,24 +111,23 @@ const handleClickOpen = () => {
 </Box>
 
     <Dialog disableEscapeKeyDown open={open} onClose={handleClose}>
-          <DialogTitle sx={{color:"secondary.main"}}>How much are we talking about?</DialogTitle>
+          <DialogTitle sx={{color:"secondary.main"}}>How much are we talking about?  {`(${sliderValue} hr)`}</DialogTitle>
           <DialogContent>
           <Box sx={{px:"5px", height:"120px" , display:"flex",alignItems:"center", justifyContent:"center" }}>
           <Slider
-  defaultValue={0}
+  defaultValue={0.5}
   onChange={handleSliderChange}
   valueLabelFormat={(value) => `${value} hr`}
   valueLabelDisplay="auto"
   step={0.5}
   marks
-  min={0}
+  min={0.5}
   max={4}
 />
 
     </Box>
           </DialogContent>
-          <DialogActions sx={{display:"flex", justifyContent:"space-between"}}>
-            <Box sx={{fontSize:"20px",fontWeight:"bold", color:"secondary.main"}}>{sliderValue < 0 ? "(0 hr)" : `(${sliderValue} hr)`}</Box>
+          <DialogActions>
             <Button variant="outlined" sx={{color:"secondary.main", fontSize:"20px", borderColor:"secondary.main"}} onClick={handleClose}>  {(() => {
     switch (sliderValue) {
       case 0.5:
