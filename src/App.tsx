@@ -4,6 +4,7 @@ import AdminHomePage from "./components/AdminInterface/AdminHomePage/AdminHomePa
 import UserHomePage from "./components/UserInterface/UserHomePage/UserHomePage";
 import * as mui from "@mui/material";
 import { ThemeProvider } from "@mui/material";
+import AdminSetting from "./components/AdminInterface/AdminSetting/AdminSetting";
 
 const theme = mui.createTheme({
   palette: {
@@ -24,6 +25,7 @@ function App() {
           <Routes>
             <Route path="/" element={<UserHomePage />} />
             <Route path="/admin" element={<AdminHomePage />} />
+            <Route path="/setting" element={<AdminSetting />} />
           </Routes>
         </BrowserRouter>
       </mui.CssBaseline>
