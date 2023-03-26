@@ -15,11 +15,12 @@ import {
   Typography,
 } from "@mui/material";
 import dayjs, { Dayjs } from "dayjs";
+import { display } from "@mui/system";
 
 const UpperUserCalendar: React.FC = () => {
 
     const today = dayjs().format("MM-DD-YYYY");
-    const [selectedDateAndPrev, setSelectedDayAndPrev] = React.useState([today,today]);
+    const [selectedDate, setSelectedDay] = React.useState(today);
     const [open, setOpen] = React.useState(false);
     const [month, setMonth] = React.useState<String>(dayjs().format("MMMM"));
     const [year, setYear] = React.useState<number>(dayjs().year());
@@ -35,17 +36,19 @@ const UpperUserCalendar: React.FC = () => {
       daysArray.push([paddedDay, dayOfWeek]);
     }
 
-    useEffect(() => {
-        const element = document.getElementById(selectedDateAndPrev[1]);
-        const oldElement = document.getElementById(selectedDateAndPrev[0]);
-        if (element && oldElement) {
-          if (element !== oldElement){
-          element.style.backgroundColor = "#4E4E61";
-          oldElement.style.backgroundColor = "#989CA9";
-          }
-        }
-        console.log(selectedDateAndPrev)
-      }, [selectedDateAndPrev,month,year]);
+
+        const handleTodayButton = async () => {
+      setSelectedDay(today);
+      setMonth(dayjs().format("MMMM"));
+      setYear(dayjs().year());
+      setTemporaryChange([dayjs().format("MMMM"),dayjs().year()])
+      setTimeout(()=>{   
+        let today_box = document.getElementById(today)
+      if (today_box !== null){
+        today_box.scrollIntoView({ behavior: 'smooth'})
+      }},200)
+
+    }
 
 
   const months:Array<[string, number]> = [];
@@ -69,7 +72,6 @@ const UpperUserCalendar: React.FC = () => {
 
         setMonth(temporaryChange[0])
         setYear(Number(temporaryChange[1]))
-        setSelectedDayAndPrev(["",""])
     }
   };
   return (
@@ -82,9 +84,9 @@ const UpperUserCalendar: React.FC = () => {
           alignItems: "center",
           justifyContent: "space-between",
           px: "20px",
-          border: "1px black solid",
         }}>
         <Button
+          onClick={()=>{handleTodayButton()}}
           variant="contained"
           sx={{
             boxShadow: "none",
@@ -149,7 +151,7 @@ const UpperUserCalendar: React.FC = () => {
         </Dialog>
       </Box>
       {/* Day scrolling picker */}
-      <Box sx={{border:"1px purple solid", height: "105px",display:"fixed", gap:"6px",  alignItems:"center", overflow:"scroll"}}>
+      <Box sx={{ height: "110px",display:"fixed", gap:"6px", px:"5px", alignItems:"start", overflow:"scroll"}}>
         {daysArray.map((day)=>{
         let monthInNum = "";
         for (let i in months){
@@ -161,11 +163,10 @@ const UpperUserCalendar: React.FC = () => {
             }
         }
             return(
-                <Box id={`${monthInNum}-${day[0]}-${year}`} onClick={()=>(setSelectedDayAndPrev((prev) => [prev[1],`${monthInNum}-${day[0]}-${year}`]))} sx={{display:"flex", textAlign:"center",flexDirection:"column",alignItems:"center", justifyContent:"space-between",py:"5px",width:"47px", height:"100px", backgroundColor:"#989CA9", borderRadius:"16px"}}>
-                    <Box >
+                <Box id={`${monthInNum}-${day[0]}-${year}`} onClick={()=>(setSelectedDay(`${monthInNum}-${day[0]}-${year}`))} sx={{display:"flex", textAlign:"center",flexDirection:"column",alignItems:"center", justifyContent:"space-between",paddingTop:"5px", paddingBottom:"15px",width:"47px", height:"100px", backgroundColor: selectedDate === `${monthInNum}-${day[0]}-${year}` ?"#4E4E61" : "#989CA9"  , borderRadius:"16px"}}>
+                    
                     <Typography variant="h6" sx={{color:"white", fontWeight:"500",position:"relative"}}>{day[0]}<Typography variant="subtitle2" sx={{color:"white",fontSize:"11px", fontWeight:"300",position:"absolute", bottom:"-13px", left:"50%", transform:"translate(-50%)", letterSpacing:"0.5px"}}>{day[1]}</Typography></Typography>
-                    </Box>
-
+                    <img style={{display: `${monthInNum}-${day[0]}-${year}` === today ? "fixed" : "none"  }} src="/assets/Icons/today_dot.svg"/>
                 </Box>
             )
         })}
