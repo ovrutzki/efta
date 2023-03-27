@@ -220,7 +220,7 @@ const TodaysInformation: React.FC = () => {
           />
         </Box>
 
-        {["Eran Hagever", "Eran Hagever","Eran Hagever"].map((event) => {
+        {["Event 1", "Event 2","Event 3"].map((event) => {
           return (
             <Box
               sx={{
