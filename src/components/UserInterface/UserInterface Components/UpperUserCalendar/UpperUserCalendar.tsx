@@ -25,13 +25,12 @@ const UpperUserCalendar: React.FC = () => {
   const [temporaryChange, setTemporaryChange] = React.useState<
     [String, Number]
   >([month, year]);
-  // const daysInMonth = dayjs(`${month} ${year}`, "MMMM YYYY").daysInMonth();
 
   useEffect(() => {
     setTimeout(() => {
       let day_to_scroll = document.getElementById(selectedDate);
       if (day_to_scroll !== null) {
-        day_to_scroll.scrollIntoView({ behavior: "smooth", inline: "center" });
+        day_to_scroll.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
       }
     }, 200);
   }, [selectedDate]);
@@ -66,7 +65,7 @@ const UpperUserCalendar: React.FC = () => {
     setTemporaryChange([dayjs().format("MMMM"), dayjs().year()]);
     let day_to_scroll = document.getElementById(today);
     if (day_to_scroll !== null) {
-      day_to_scroll.scrollIntoView({ behavior: "smooth", inline: "center" });
+      day_to_scroll.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
     }
   };
 
