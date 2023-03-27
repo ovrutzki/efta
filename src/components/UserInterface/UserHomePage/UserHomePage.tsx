@@ -13,7 +13,7 @@ const UserHomePage: React.FC = () => {
 
   return (<Box sx={{minHeight:"100vh", backgroundImage:'url("/assets/mainBG/background_vector.svg")',backgroundSize: 'cover', display:"flex", flexDirection:"column", alignItems:"center"}}>
 
-<Box sx={{height:"260px", boxShadow:"0px 4px 4px rgba(0, 0, 0, 0.25);", borderRadius:"0px 0px 30px 30px", backgroundColor:"#EBEBEC", width:"100vw"}}>
+<Box sx={{height:"260px", boxShadow:"0px 4px 4px rgba(0, 0, 0, 0.25);", borderRadius:"0px 0px 30px 30px", backgroundColor:"#EBEBEC", width:"100%"}}>
  <UserNavBar/>
   <UpperUserCalendar/>
 </Box>

@@ -5,12 +5,14 @@ import TodaysInformationButton from "./TodaysInformationButtton";
 
 const square_box_sx = {
   borderRadius: "16px",
-  my: "10px",
+  marginBottom: "15px",
   height: "135px",
-  width: "165px",
+  // width: "165px",
+  width: "calc((100% - 15px)/2)",
+
   backgroundColor: "#C7CAD2",
   boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25);",
-  border: " 0.5px solid #4e4e6056",
+  border: "0.5px solid #4e4e6056",
   position: "relative",
 };
 
@@ -39,8 +41,7 @@ const TodaysInformation: React.FC = () => {
       {/* 4 squares */}
 
       <Box
-        sx={{
-          width: "90vw",
+        sx={{width:"90%",
           height: "fit-content",
           display: "flex",
           flexWrap: "wrap",
@@ -140,18 +141,18 @@ const TodaysInformation: React.FC = () => {
               style={{ width: "38px", height: "32px" }}
               src="./assets/Icons/google_meet_icon.svg"
             />
-            </Box>
-            <Box
-              sx={{
-                position: "absolute",
-                top: "55px",
-                width: "100%",
-                height: "fit-content",
-                display:"flex",
-                gap:"10px",
-                justifyContent:"center"
-              }}
-            >
+          </Box>
+          <Box
+            sx={{
+              position: "absolute",
+              top: "55px",
+              width: "100%",
+              height: "fit-content",
+              display: "flex",
+              gap: "10px",
+              justifyContent: "center",
+            }}
+          >
             <TodaysInformationButton
               src="./assets/Icons/buttonsIcons/external_link_icon.svg"
               padding={15}
@@ -162,7 +163,7 @@ const TodaysInformation: React.FC = () => {
                 console.log("yes");
               }}
             />
-                        <TodaysInformationButton
+            <TodaysInformationButton
               src="./assets/Icons/buttonsIcons/copy_icon.svg"
               padding={15}
               width={50}
@@ -172,11 +173,77 @@ const TodaysInformation: React.FC = () => {
                 console.log("yes");
               }}
             />
-            </Box>
+          </Box>
         </Box>
       </Box>
 
       {/* lectures today  */}
+
+      <Box
+        sx={{
+          borderRadius: "16px",
+          marginBottom: "15px",
+          minHeight: "50px",
+          width: "90%",
+          backgroundColor: "#C7CAD2",
+          boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25);",
+          border: " 0.5px solid #4e4e6056",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          p: 1,
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            width: "100%",
+            marginBottom: "16px",
+          }}
+        >
+          <img
+            style={{ width: "32px", height: "32px" }}
+            src="./assets/Icons/teacher_icon.svg"
+          />
+
+          <TodaysInformationButton
+            src="./assets/Icons/buttonsIcons/google_classroom_icon.svg"
+            padding={10}
+            width={40}
+            height={40}
+            radius={13}
+            onClick={() => {
+              console.log("yes");
+            }}
+          />
+        </Box>
+
+        {["Eran Hagever", "Eran Hagever","Eran Hagever"].map((event) => {
+          return (
+            <Box
+              sx={{
+                width: "98%",
+                py: 1,
+                px: "12px",
+                my: "4px",
+                borderRadius: "16px",
+                // backgroundColor: "#9c9fa865",
+                // boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.14);",
+                border: " 2px solid #b7b4b47b",
+              }}
+            >
+              <Typography
+                variant="h6"
+                sx={{ color: "white", fontWeight: "bold" }}
+              >
+                {event}
+              </Typography>
+            </Box>
+          );
+        })}
+      </Box>
     </>
   );
 };
