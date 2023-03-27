@@ -14,7 +14,7 @@ const AttendanceBar: React.FC = () => {
         borderRadius: "16px",
         px:1,
         fontWeight: "400",
-        fontSize:"11px"
+        fontSize:"12.5px"
     }
 
 const [selectedAttendance, setSelectedAttendance ] = useState("on_time");
@@ -51,7 +51,7 @@ const handleClickOpen = () => {
 
     <img src="./assets/Icons/attendance_icon.svg"></img>
 
-    <Box sx={{mx:"5px", display:"flex",gap:"5px", justifyContent:"space-between"}}>
+    <Box sx={{mx:"5px",width:"85%", display:"flex",gap:"5px", justifyContent:"space-between"}}>
     <Button
           onClick={()=>{
             setSelectedAttendance("on_time")

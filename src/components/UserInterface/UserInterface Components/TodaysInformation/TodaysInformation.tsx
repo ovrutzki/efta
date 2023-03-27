@@ -145,11 +145,11 @@ const TodaysInformation: React.FC = () => {
           <Box
             sx={{
               position: "absolute",
-              top: "55px",
+              top: "60px",
               width: "100%",
               height: "fit-content",
               display: "flex",
-              gap: "10px",
+              gap: "15px",
               justifyContent: "center",
             }}
           >
