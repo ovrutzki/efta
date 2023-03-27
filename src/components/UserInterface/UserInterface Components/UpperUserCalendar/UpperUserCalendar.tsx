@@ -27,7 +27,6 @@ const UpperUserCalendar: React.FC = () => {
   >([month, year]);
 
   useEffect(() => {
-    if (selectedDate !== today){
 
       setTimeout(() => {
         let day_to_scroll = document.getElementById(selectedDate);
@@ -35,7 +34,6 @@ const UpperUserCalendar: React.FC = () => {
           day_to_scroll.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
         }
       }, 200);
-    }
     }, [selectedDate]);
 
   const months: Record<string, number> = {
