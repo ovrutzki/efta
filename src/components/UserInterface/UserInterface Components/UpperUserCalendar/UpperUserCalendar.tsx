@@ -92,7 +92,7 @@ const UpperUserCalendar: React.FC = () => {
       <Box
         sx={{
           display: "flex",
-          height: "70px",
+          height: "60px",
           alignItems: "center",
           justifyContent: "space-between",
           px: "20px",
@@ -186,6 +186,7 @@ const UpperUserCalendar: React.FC = () => {
       {/* Day scrolling picker */}
       <Box
         sx={{
+          marginTop:"10px",
           height: "110px",
           display: "fixed",
           px: "5px",
