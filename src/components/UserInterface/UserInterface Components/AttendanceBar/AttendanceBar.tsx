@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as mui from "@mui/material";
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel, Slider, Typography } from "@mui/material";
+import { BorderColor } from "@mui/icons-material";
 
 const AttendanceBar: React.FC = () => {
 
@@ -44,7 +45,8 @@ const handleClickOpen = () => {
 
   return (<>
 <Box sx={{
-    width:"90%",height:"54px", display:"flex",justifyContent:"space-between", my:"15px", px:"10px", alignItems:"center", backgroundColor:"#B5B8C2",borderRadius:"16px"
+    width:"90%",height:"54px", display:"flex",justifyContent:"space-between", my:"15px", px:"10px", alignItems:"center", backgroundColor:"#B5B8C2",borderRadius:"16px",boxShadow:"0px 4px 4px rgba(0, 0, 0, 0.25);"
+,border:" 0.5px solid #4e4e6056"
 }}>
 
     <img src="./assets/Icons/attendance_icon.svg"></img>

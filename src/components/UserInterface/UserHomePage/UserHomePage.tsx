@@ -19,7 +19,7 @@ const UserHomePage: React.FC = () => {
 </Box>
 
 <AttendanceBar />
-
+<TodaysInformation />
 </Box>
   );
 };
