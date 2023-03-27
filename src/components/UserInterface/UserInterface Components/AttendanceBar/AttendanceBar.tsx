@@ -14,7 +14,7 @@ const AttendanceBar: React.FC = () => {
         borderRadius: "16px",
         px:1,
         fontWeight: "400",
-        fontSize:"12.5px"
+        fontSize:"3.2vw"
     }
 
 const [selectedAttendance, setSelectedAttendance ] = useState("on_time");

@@ -27,13 +27,16 @@ const UpperUserCalendar: React.FC = () => {
   >([month, year]);
 
   useEffect(() => {
-    setTimeout(() => {
-      let day_to_scroll = document.getElementById(selectedDate);
-      if (day_to_scroll !== null) {
-        day_to_scroll.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-      }
-    }, 200);
-  }, [selectedDate]);
+    if (selectedDate !== today){
+
+      setTimeout(() => {
+        let day_to_scroll = document.getElementById(selectedDate);
+        if (day_to_scroll !== null) {
+          day_to_scroll.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+        }
+      }, 200);
+    }
+    }, [selectedDate]);
 
   const months: Record<string, number> = {
     January: 1,
