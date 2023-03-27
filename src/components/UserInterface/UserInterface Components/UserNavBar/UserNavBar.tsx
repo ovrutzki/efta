@@ -25,17 +25,13 @@ const UserNavBar: React.FC = () => {
         <img src="./assets/Icons/menu_icon.svg" />
       </Box>
 
-      <mui.Button
+      <Box
         sx={{
           position: "absolute",
           right: "50%",
-          top:"10px",
+          top:"15px",
           transform: "translate(50%)",
           borderRadius: "15px",
-          ".MuiTouchRipple-child": {
-            backgroundColor: "#44658769",
-          },
-          "&:hover": { backgroundColor: "transparent" },
         }}
       >
         <img
@@ -43,7 +39,7 @@ const UserNavBar: React.FC = () => {
           src="./assets/logo/logo.svg"
           alt="Logo"
         />
-      </mui.Button>
+      </Box>
 
         <Box sx={{
           position:"absolute",
