@@ -6,7 +6,7 @@ const UserNavBar: React.FC = () => {
   return (
     <Box
       sx={{
-        height: "75px",
+        height: "80px",
         display: "flex",
         position: "sticky",
         alignItems: "center",
@@ -29,14 +29,14 @@ const UserNavBar: React.FC = () => {
         sx={{
           position: "absolute",
           right: "50%",
-          top:"15px",
+          top:"1px",
           transform: "translate(50%)",
           borderRadius: "15px",
         }}
       >
         <img
-          style={{ width: "50px", height: "50px" }}
-          src="./assets/logo/logo.svg"
+          style={{height: "65px", objectFit:"contain" }}
+          src="./assets/logo/full_logo.png"
           alt="Logo"
         />
       </Box>

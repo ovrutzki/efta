@@ -91,7 +91,7 @@ const handleClickOpen = () => {
           variant="contained"
           sx={{
             ...button_sx,
-            minWidth:"86px",
+            minWidth:"94px",
             backgroundColor: selectedAttendance === "ill_be_late" ? "#EAD87B"  :"#ead87b3b" ,
             border:"0.5px solid #EAD87B",
             boxShadow: selectedAttendance === "ill_be_late" ? "0px 4px 4px rgba(0, 0, 0, 0.25);"  :"none" , 
