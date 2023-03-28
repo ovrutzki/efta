@@ -2,7 +2,11 @@ import React from "react";
 import { Box } from "@mui/material";
 import * as mui from "@mui/material";
 
-const UserNavBar: React.FC = () => {
+interface IUserRole{
+  role:string
+}
+
+const UserNavBar: React.FC<IUserRole> = (props) => {
   return (
     <Box
       sx={{
@@ -14,6 +18,16 @@ const UserNavBar: React.FC = () => {
       }}
     >
       <Box
+
+        onClick={()=>{
+          if (props.role==="admin"){
+            console.log("Admin side bar")
+          }else if (props.role==="user"){
+            console.log("user side bar");
+            
+          }
+        }}
+
         sx={{
           width: "40px",
           height: "40px",
