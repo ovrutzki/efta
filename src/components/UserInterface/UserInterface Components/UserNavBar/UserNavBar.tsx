@@ -1,12 +1,14 @@
 import React from "react";
 import { Box } from "@mui/material";
 import * as mui from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 interface IUserRole{
   role:string
 }
 
 const UserNavBar: React.FC<IUserRole> = (props) => {
+  const navigate = useNavigate()
   return (
     <Box
       sx={{
@@ -62,7 +64,7 @@ const UserNavBar: React.FC<IUserRole> = (props) => {
           borderRadius:"16px 0 0 16px",
           backgroundColor:"#989CA9"
   }}>
-        <mui.Typography variant="subtitle2" sx={{color:"white", fontWeight:"bold", letterSpacing:"0.5px"}}>{"Assaf".toUpperCase()}</mui.Typography>
+        <mui.Typography onClick={()=>{props.role === "admin" ? navigate("/"):navigate("/admin")}} variant="subtitle2" sx={{color:"white", fontWeight:"bold", letterSpacing:"0.5px"}}>{"Assaf".toUpperCase()}</mui.Typography>
         </Box>
     </Box>
       
