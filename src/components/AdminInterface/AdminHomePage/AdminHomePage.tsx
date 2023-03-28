@@ -1,10 +1,25 @@
 import { Box, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import React from "react";
+import React, { useState } from "react";
 import AttendanceBar from "../../UserInterface/UserInterface Components/AttendanceBar/AttendanceBar";
 import TodaysInformation from "../../UserInterface/UserInterface Components/TodaysInformation/TodaysInformation";
 import UpperUserCalendar from "../../UserInterface/UserInterface Components/UpperUserCalendar/UpperUserCalendar";
 import UserNavBar from "../../UserInterface/UserInterface Components/UserNavBar/UserNavBar";
+
+const studentArr=[
+  { studentName: "Eran Hagever", status: 0 },
+  { studentName: "Eran Hagever", status: -1 },
+  { studentName: "Eran Hagever", status: 0.5 },
+  { studentName: "Eran Hagever", status: 0 },
+  { studentName: "Eran Hagever", status: 0.5 },
+  { studentName: "Eran Hagever", status: 0.5 },
+  { studentName: "Eran Hagever", status: 0 },
+  { studentName: "Eran Hagever", status: -1 },
+  { studentName: "Eran Hagever", status: 0 },
+  { studentName: "Eran Hagever", status: -1 },
+  { studentName: "Eran Hagever", status: 0.5 },
+
+];
 
 
 const statusBgColor = (status:number)=>{
@@ -44,6 +59,8 @@ const statusDisplay = (status:number)=>{
 
 const AdminHomePage: React.FC = () => {
 
+  const [toggleValue, setToggleValue] = useState("ALL")
+
   const status_sx = {
     display:"flex",
         gap:"5px",
@@ -56,7 +73,17 @@ const AdminHomePage: React.FC = () => {
         alignItems:"center",
         color:"white"
   }
+  const button_sx ={
+        display:"flex",
+        justifyContent:"center",
+        alignItems:"center",
+        fontWeight:"bold",
+        my:1,
+        borderRadius:"6px",
+        width:"24vw",
+        letterSpacing:"0.8px",
 
+  }
   return (
     <Box
       sx={{
@@ -81,8 +108,20 @@ const AdminHomePage: React.FC = () => {
         <UpperUserCalendar />
       </Box>
 
+        <Box sx={{m:"15px 0px 0px 5%",px:1,gap:1,alignSelf:"flex-start", width:"fit-content",height:"50px", display:"flex", justifyContent:"space-around", bgcolor:"#EBEBEC", borderRadius:"10px",}}>
+        <Box sx={{...button_sx,
+                bgcolor: toggleValue === "SORTED" ?  "none" :"#989CA9",
+                color: toggleValue === "SORTED" ? "#989CA9"  :  "white"
+        }} onClick={()=>{setToggleValue("ALL")}}>ALL</Box>
+        <Box sx={{...button_sx,
+                        bgcolor: toggleValue === "ALL" ?  "none" :"#989CA9",
+                        color: toggleValue === "ALL" ? "#989CA9"  :  "white"
+        }} onClick={()=>{setToggleValue("SORTED")}}>SORTED</Box>
+        </Box>
+
       <Box
         sx={{
+          // marginBottom: "15px",
           my: "15px",
           width: "90%",
           bgcolor: "#EBEBEC",
@@ -94,41 +133,21 @@ const AdminHomePage: React.FC = () => {
           flexDirection: "column",
           p: 2,
           justifyContent: "center",
-          gap: "15px",
+          // gap: "15px",
         }}
       >
-        {[
-          { studentName: "Eran Hagever", status: 0.5 },
-          { studentName: "Eran Hagever", status: 0 },
-          { studentName: "Eran Hagever", status: -1 },
-          { studentName: "Eran Hagever", status: 0.5 },
-          { studentName: "Eran Hagever", status: 0 },
-          { studentName: "Eran Hagever", status: -1 },
-          { studentName: "Eran Hagever", status: 0.5 },
-          { studentName: "Eran Hagever", status: 0 },
-          { studentName: "Eran Hagever", status: -1 },
-          { studentName: "Eran Hagever", status: 0.5 },
-          { studentName: "Eran Hagever", status: 0 },
-          { studentName: "Eran Hagever", status: -1 },
-          { studentName: "Eran Hagever", status: 0.5 },
-          { studentName: "Eran Hagever", status: 0 },
-          { studentName: "Eran Hagever", status: -1 },
-          { studentName: "Eran Hagever", status: 0.5 },
-          { studentName: "Eran Hagever", status: 0 },
-          { studentName: "Eran Hagever", status: -1 },
-          { studentName: "Eran Hagever", status: 0.5 },
-          { studentName: "Eran Hagever", status: 0 },
-          { studentName: "Eran Hagever", status: -1 },
-
-        ].map((item) => {
+        { 
+        
+        studentArr.filter((item)=>toggleValue==="SORTED"? item.status !== 0  :true).sort((a, b) => toggleValue === "SORTED" ? b.status - a.status : 0).map((item) => {
           return (
+
             <Box
-              sx={{
-                borderBottom: "2px #B7B7B7 solid",
-                p: "4px",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
+            sx={{
+              borderBottom: "2px #B7B7B7 solid",
+              p: 1,
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
               }}
             >
               <Typography
@@ -138,8 +157,10 @@ const AdminHomePage: React.FC = () => {
                 {item.studentName}
               </Typography>
               <Box sx={{...status_sx, bgcolor: statusBgColor(item.status)}}>{
-              statusDisplay(item.status)}</Box>
+                statusDisplay(item.status)}</Box>
             </Box>
+
+            
           );
         })}
       </Box>
