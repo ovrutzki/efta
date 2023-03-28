@@ -14,8 +14,8 @@ const AttendanceBar: React.FC = () => {
         borderRadius: "16px",
         px:1,
         fontWeight: "400",
-        fontSize:"clamp(9px,3vw,15px)"
-    }
+        fontSize:"clamp(9px,3vw,15px)",
+        whiteSpace: 'nowrap'    }
 
 const [selectedAttendance, setSelectedAttendance ] = useState("on_time");
 const [open, setOpen] = React.useState(false);

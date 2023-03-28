@@ -107,10 +107,12 @@ const UpperUserCalendar: React.FC = () => {
             boxShadow: "none",
             width: "60px",
             height: "32px",
-            backgroundColor: "primary.light",
+            // backgroundColor: "primary.light",
+            backgroundColor: "#B7887D",
             borderRadius: "16px",
             fontWeight: "400",
-            "&:hover": { backgroundColor: "primary.light" },
+            // "&:hover": { backgroundColor: "primary.light" },
+            "&:hover": { backgroundColor: "#B7887D" },
           }}
         >
           Today
