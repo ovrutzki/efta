@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as mui from "@mui/material";
 import { Button, Divider } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { useNavigate } from "react-router-dom";
 import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
-import LoginIcon from '@mui/icons-material/Login';
-import LogoutIcon from '@mui/icons-material/Logout';
+import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { height } from "@mui/system";
+import { useDispatch } from "react-redux";
+import { getMondayCode } from "../../../store/slicer/mondaySlicer";
+import { getDataFromMonday, getMondayData, oauth } from "../../../utils/utils";
 
 const SideBar: React.FC = () => {
   const navigate = useNavigate();
@@ -14,25 +18,26 @@ const SideBar: React.FC = () => {
     left: false,
   });
 
+  
 
- 
   return (
     <React.Fragment>
       <mui.Container
         sx={{
-          position:'absolute',
-          left:0,
+          position: "absolute",
+          left: 0,
           m: 0,
-          py:3,
+          py: 3,
           width: "10vw",
           height: "100vh",
           display: "flex",
-          justifySelf:"flex-start",
+          justifySelf: "flex-start",
           flexDirection: "column",
           justifyContent: "space-between",
         }}
       >
         <svg
+        onClick={getDataFromMonday}
           xmlns="http://www.w3.org/2000/svg"
           width="30"
           height="32"
@@ -67,7 +72,13 @@ const SideBar: React.FC = () => {
         }
       >
         <mui.Box
-          sx={{ width: 250,height:'100%' ,display:'flex', flexDirection:'column', justifyContent:'space-between'}}
+          sx={{
+            width: 250,
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
           role="presentation"
           onClick={() => setOpenBar({ left: true })}
         >
@@ -76,28 +87,53 @@ const SideBar: React.FC = () => {
               [
                 "Admin",
                 <>
-                  <SupervisorAccountIcon />{" "}
+                  <SupervisorAccountIcon />
                 </>,
               ],
               ["Gaunt", <CalendarMonthIcon />],
               ["Setting", <SettingsIcon />],
-            ].map((text, index) => (
-              <mui.ListItem
-                key={index}
-                onClick={() => navigate(`/${text[0]}`)}
-                disablePadding
-              >
-                <mui.ListItemButton>
-                  <mui.ListItemIcon>
-                    {text[1]}
-                    <Divider />
-                  </mui.ListItemIcon>
-                  <mui.ListItemText primary={text[0]} />
-                </mui.ListItemButton>
-              </mui.ListItem>
-            ))}
+              [
+                "Monday",
+                <a href="">
+                  <img
+                    src="./monday-logo-modified.png"
+                    style={{ height: "15px" }}
+                  />
+                </a>,
+              ],
+            ].map((text, index) =>
+              text[0] === "Monday" ? (
+                <a href="https://auth.monday.com/oauth2/authorize?client_id=502b3ec84e869c8facdac09d8d8710fd">
+                  <mui.ListItem key={index} disablePadding>
+                    <mui.ListItemButton>
+                      <mui.ListItemIcon>
+                        {text[1]}
+                        <Divider />
+                      </mui.ListItemIcon>
+                      <mui.ListItemText primary={text[0]} />
+                    </mui.ListItemButton>
+                  </mui.ListItem>
+                </a>
+              ) : (
+                <mui.ListItem
+                  key={index}
+                  onClick={() => {
+                    navigate(`/${text[0]}`);
+                  }}
+                  disablePadding
+                >
+                  <mui.ListItemButton>
+                    <mui.ListItemIcon>
+                      {text[1]}
+                      <Divider />
+                    </mui.ListItemIcon>
+                    <mui.ListItemText primary={text[0]} />
+                  </mui.ListItemButton>
+                </mui.ListItem>
+              )
+            )}
           </mui.List>
-          <mui.List sx={{justifyContent:'flex-end'}}>
+          <mui.List sx={{ justifyContent: "flex-end" }}>
             {[
               ["Log in", <LoginIcon />],
               ["Log out", <LogoutIcon />],
