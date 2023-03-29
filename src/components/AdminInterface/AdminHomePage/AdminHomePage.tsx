@@ -3,6 +3,7 @@ import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 import AttendanceBar from "../../UserInterface/UserInterface Components/AttendanceBar/AttendanceBar";
 import TodaysInformation from "../../UserInterface/UserInterface Components/TodaysInformation/TodaysInformation";
+import TodaysInformationButton from "../../UserInterface/UserInterface Components/TodaysInformation/TodaysInformationButtton";
 import UpperUserCalendar from "../../UserInterface/UserInterface Components/UpperUserCalendar/UpperUserCalendar";
 import UserNavBar from "../../UserInterface/UserInterface Components/UserNavBar/UserNavBar";
 
@@ -65,11 +66,11 @@ const AdminHomePage: React.FC = () => {
     display:"flex",
         gap:"5px",
         width:"fit-content",
-        height: "30px",
+        height: "25px",
         borderRadius: "16px",
         px:1,
         fontWeight: "400",
-        fontSize:"clamp(9px,3vw,15px)",
+        fontSize:"clamp(8px,2.8vw,15px)",
         alignItems:"center",
         color:"white"
   }
@@ -106,18 +107,35 @@ const AdminHomePage: React.FC = () => {
       >
         <UserNavBar role="admin" />
         <UpperUserCalendar />
-      </Box>
+      </Box >
+<Box sx={{my:"15px", display:"flex", justifyContent:"space-between", width:"90%"}}>
 
-        <Box sx={{m:"15px 0px 0px 5%",px:1,gap:1,alignSelf:"flex-start", width:"fit-content",height:"50px", display:"flex", justifyContent:"space-around", bgcolor:"#EBEBEC", borderRadius:"10px",}}>
+        <Box sx={{px:1,gap:1,alignSelf:"flex-start", width:"fit-content",height:"50px", display:"flex", justifyContent:"space-around", bgcolor:"#EBEBEC", borderRadius:"10px",}}>
         <Box sx={{...button_sx,
                 bgcolor: toggleValue === "SORTED" ?  "none" :"#989CA9",
                 color: toggleValue === "SORTED" ? "#989CA9"  :  "white"
-        }} onClick={()=>{setToggleValue("ALL")}}>ALL</Box>
+              }} onClick={()=>{setToggleValue("ALL")}}>ALL</Box>
         <Box sx={{...button_sx,
                         bgcolor: toggleValue === "ALL" ?  "none" :"#989CA9",
                         color: toggleValue === "ALL" ? "#989CA9"  :  "white"
-        }} onClick={()=>{setToggleValue("SORTED")}}>SORTED</Box>
+                      }} onClick={()=>{setToggleValue("SORTED")}}>SORTED</Box>
         </Box>
+        <TodaysInformationButton
+            src="./assets/Icons/buttonsIcons/monday_icon.png"
+            padding={15}
+            width={50}
+            height={50}
+            radius={13}
+            onClick={() => {
+              console.log("yes");
+            }
+          }
+          shadow={false}
+          />
+
+                      </Box>
+
+
 
       <Box
         sx={{
@@ -150,12 +168,29 @@ const AdminHomePage: React.FC = () => {
               alignItems: "center",
               }}
             >
+
+              <Box sx={{display:"flex",gap:"5px", alignItems:"center"}}>
+
               <Typography
-                variant="h5"
+                variant="h6"
                 sx={{ color: "#979CA9", fontWeight: "bold" }}
-              >
+                >
                 {item.studentName}
               </Typography>
+              
+              <TodaysInformationButton
+              src="./assets/Icons/buttonsIcons/whatsapp_icon.svg"
+              padding={8}
+              width={28}
+              height={28}
+              radius={10}
+              onClick={() => {
+                console.log("yes");
+              }}
+              shadow={false}
+            />
+                </Box>
+
               <Box sx={{...status_sx, bgcolor: statusBgColor(item.status)}}>{
                 statusDisplay(item.status)}</Box>
             </Box>
@@ -164,6 +199,9 @@ const AdminHomePage: React.FC = () => {
           );
         })}
       </Box>
+
+
+      <TodaysInformation />
     </Box>
   );
 };

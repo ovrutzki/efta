@@ -9,6 +9,7 @@ interface ITodaysInformationButtonProps {
   radius: number;
   padding: number;
   onClick: () => void;
+  shadow?:boolean
 }
 
 const TodaysInformationButton: React.FC<ITodaysInformationButtonProps> = (
@@ -25,7 +26,7 @@ const TodaysInformationButton: React.FC<ITodaysInformationButtonProps> = (
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25);",
+        boxShadow: props.shadow===false ?"none":"0px 4px 4px rgba(0, 0, 0, 0.25);",
         "&:active":{backgroundColor: "#bfc2cb", scale:"0.95"}
       }}
     >
