@@ -4,6 +4,8 @@ import AdminHomePage from "./components/AdminInterface/AdminHomePage/AdminHomePa
 import UserHomePage from "./components/UserInterface/UserHomePage/UserHomePage";
 import * as mui from "@mui/material";
 import { ThemeProvider } from "@mui/material";
+import SignUpLogInComponent from "./components/SignUpLogInComponents/SignUpLogInComponent";
+import MondayIntegration from "./components/SignUpLogInComponents/MondayIntegration";
 
 const theme = mui.createTheme({
   palette: {
@@ -28,6 +30,8 @@ function App() {
           <Routes>
             <Route path="/" element={<UserHomePage />} />
             <Route path="/admin" element={<AdminHomePage />} />
+            <Route path="/sign-in" element={<SignUpLogInComponent />} />
+            <Route path="/monday" element={<MondayIntegration />} />
           </Routes>
         </BrowserRouter>
       </mui.CssBaseline>
