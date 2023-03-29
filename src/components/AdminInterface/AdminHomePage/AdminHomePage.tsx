@@ -121,6 +121,7 @@ const AdminHomePage: React.FC = () => {
                       }} onClick={()=>{setToggleValue("SORTED")}}>SORTED</Box>
         </Box>
         <TodaysInformationButton
+            href="https://www.monday.com"
             src="./assets/Icons/buttonsIcons/monday_icon.png"
             padding={15}
             width={50}
@@ -139,7 +140,6 @@ const AdminHomePage: React.FC = () => {
 
       <Box
         sx={{
-          // marginBottom: "15px",
           my: "15px",
           width: "90%",
           bgcolor: "#EBEBEC",
@@ -151,7 +151,6 @@ const AdminHomePage: React.FC = () => {
           flexDirection: "column",
           p: 2,
           justifyContent: "center",
-          // gap: "15px",
         }}
       >
         { 

@@ -8,7 +8,8 @@ interface ITodaysInformationButtonProps {
   height: number;
   radius: number;
   padding: number;
-  onClick: () => void;
+  onClick?: () => void;
+  href?:string;
   shadow?:boolean
 }
 
@@ -16,6 +17,8 @@ const TodaysInformationButton: React.FC<ITodaysInformationButtonProps> = (
   props
 ) => {
   return (
+    <a target="_blank" href={props.href} style={{all:"unset"}}>
+
     <Box
       sx={{
         border: "0.5px solid #4e4e6028",
@@ -29,7 +32,7 @@ const TodaysInformationButton: React.FC<ITodaysInformationButtonProps> = (
         boxShadow: props.shadow===false ?"none":"0px 4px 4px rgba(0, 0, 0, 0.25);",
         "&:active":{backgroundColor: "#bfc2cb", scale:"0.95"}
       }}
-    >
+      >
       <button
         style={{
           all: "unset",
@@ -45,9 +48,10 @@ const TodaysInformationButton: React.FC<ITodaysInformationButtonProps> = (
             height: `${props.height - props.padding}px`,
           }}
           src={props.src}
-        />
+          />
       </button>
     </Box>
+          </a>
   );
 };
 
