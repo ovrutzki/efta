@@ -28,6 +28,7 @@ const InputFieldComponent: React.FC<IInputFieldComponent> = (props) => {
         </Typography>
 
         {props.questionMarkSrc ? (
+          <a style={{all:"unset"}} href={props.questionMarkSrc} target="_blank" >
           <Box
             sx={{
               display: "flex",
@@ -43,7 +44,7 @@ const InputFieldComponent: React.FC<IInputFieldComponent> = (props) => {
             }}
           >
             ?
-          </Box>
+          </Box></a>
         ) : (
           <></>
         )}

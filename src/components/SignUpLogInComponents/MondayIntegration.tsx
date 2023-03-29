@@ -64,13 +64,13 @@ return(<>
 
           <InputFieldComponent
           headline="Monday's token"
-          questionMarkSrc="w"
+          questionMarkSrc="https://support.monday.com/hc/en-us/articles/360005144659-Does-monday-com-have-an-API-"
           placeholder=""
           setValueFunction={setMondayToken}
           />
         <InputFieldComponent
         headline="Board id"
-        questionMarkSrc="w"
+        questionMarkSrc="https://support.monday.com/hc/en-us/articles/360000225709-Board-item-column-and-automation-or-integration-ID-s"
         placeholder=""
         setValueFunction={setBoardId}
         />
@@ -81,7 +81,7 @@ return(<>
         />
         <InputFieldComponent
         headline="Classroom Link"
-        questionMarkSrc="w"
+        questionMarkSrc="https://support.google.com/edu/classroom/answer/6020282?hl=en&co=GENIE.Platform%3DDesktop#zippy=%2Cinvite-students-with-an-invite-link"
         placeholder=""
         setValueFunction={setClassroomLink}
         />
@@ -100,7 +100,7 @@ return(<>
 
         }}
       >
-        SUBMIT
+        TAKE ME TO EFTA !
       </Button>
     </Box>
 </>

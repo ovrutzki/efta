@@ -162,6 +162,7 @@ useEffect(()=>{
           backgroundColor: "#979CA9",
           "&:active": { backgroundColor: "#979ca9" },
           "&:hover": { backgroundColor: "#979ca98b" },
+          marginBottom:"20px"
         }}
 
         onClick={()=>{
