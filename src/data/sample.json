@@ -1,0 +1,40 @@
+[{
+    "_id": "6423ea4eb1effff75a79e27b",
+    "dayNumber": 1,
+    "date": "04-04-2023",
+    "events": [
+      {
+        "eventName": "CSS basics",
+        "link": "https://docs.google.com/presentation/d/1LG4s3Mp6--_dWhYuWkzy2SFGxVWxwQeKp9dLbpcwsP4/edit#slide=id.p",
+        "_id": "642453c24bd98e1d8de6fbf8"
+      },
+      {
+        "eventName": "Loops",
+        "link": "https://docs.google.com/presentation/d/1GHxsrNV_strQGXb4RcPT1z4WRWU1bJfw5PFySn5S9Ak/edit#slide=id.p",
+        "_id": "642453c24bd98e1d8de6fbf9"
+      }
+    ],
+    "mentorName": "eran ovrutzki",
+    "mentorPhone": "524682222",
+    "address": "Lilingblom, 20",
+    "hours": [
+      "10:30",
+      "18:00"
+    ],
+    "dailyClassRoom": "https://classroom.google.com/w/NTc4MTMyNjgwODM2/tc/NTc4NzIwMzc5NzE2",
+    "googleMeet": "",
+    "guestLecturer": false,
+    "attendance": [
+      {
+        "studentName": "q@q.com",
+        "status": 3,
+        "_id": "6423ebf148bc74ca595ed93a"
+      },
+      {
+        "studentName": "w@w.com",
+        "status": 111,
+        "_id": "6423f15fe9080191d113e90d"
+      }
+    ],
+    "__v": 0
+  }]
