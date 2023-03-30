@@ -75,17 +75,19 @@ const InputFieldComponent: React.FC<IInputFieldComponent> = (props) => {
   style={{
     all: "unset",
     width: "100%",
-    // color: "white",
+    color: "white",
     ...(props.inputType === "date" && {
       appearance: "none",
       WebkitAppearance: "none",
-      backgroundColor: "#fff",
-      border: "1px solid #ccc",
-      borderRadius: "4px",
-      padding: "8px",
-      fontSize: "16px",
-      textAlign: "center",
-      width: "200px"
+      position:"relative",
+      
+      // backgroundColor: "#fff",
+      // border: "1px solid #ccc",
+      // borderRadius: "4px",
+      // padding: "8px",
+      // fontSize: "18px",
+      // textAlign: "center",
+      width: "100%"
     })
   }}
 />
