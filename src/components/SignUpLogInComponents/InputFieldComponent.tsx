@@ -87,7 +87,8 @@ const InputFieldComponent: React.FC<IInputFieldComponent> = (props) => {
       // padding: "8px",
       // fontSize: "18px",
       // textAlign: "center",
-      width: "100%"
+      width: "100%",
+      minHeight:"1.2rem"
     })
   }}
 />
