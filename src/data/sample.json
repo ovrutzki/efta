@@ -1,4 +1,4 @@
-[{
+{
     "_id": "6423ea4eb1effff75a79e27b",
     "dayNumber": 1,
     "date": "04-04-2023",
@@ -22,7 +22,7 @@
       "18:00"
     ],
     "dailyClassRoom": "https://classroom.google.com/w/NTc4MTMyNjgwODM2/tc/NTc4NzIwMzc5NzE2",
-    "googleMeet": "",
+    "googleMeet": "https://meet.google.com/",
     "guestLecturer": false,
     "attendance": [
       {
@@ -36,5 +36,6 @@
         "_id": "6423f15fe9080191d113e90d"
       }
     ],
+    "courseCode":"123456",
     "__v": 0
-  }]
+  }

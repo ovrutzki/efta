@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import * as mui from "@mui/material";
 import { Box, Typography } from "@mui/material";
 import TodaysInformationButton from "./TodaysInformationButtton";
+import { useSelector } from "react-redux/es/exports";
+import { RootState } from "../../../../store/store";
+import IDay from "../../../types/interfaces/interfaces";
 
 const square_box_sx = {
   borderRadius: "16px",
@@ -36,6 +39,20 @@ const typography_design_sx = {
   fontSize: "20px",
 };
 const TodaysInformation: React.FC = () => {
+
+  const dayData = useSelector((state:RootState)=> state.days.TodaysValue)
+
+  const navigationLink = (address:string) => {
+    const googleApiLink =  "https://www.google.com/maps/search/?api=1&query="
+    const punctRegex = /[ ,.:;]/g;
+    const organizedAddress = address.split(punctRegex).join("+");
+    
+    // const organizedAddress = address.split(", ").join("+")
+    console.log(organizedAddress)
+    return `${googleApiLink}${organizedAddress}`
+  }
+  
+
   return (
     <>
       {/* 4 squares */}
@@ -57,7 +74,7 @@ const TodaysInformation: React.FC = () => {
           </Box>
           <Box sx={{ ...typography_box_sx }}>
             <Typography variant="h4" sx={{ ...typography_design_sx }}>
-              Ahad ha'am 21, TLV
+              {dayData.address}
             </Typography>
           </Box>
           <Box
@@ -73,9 +90,7 @@ const TodaysInformation: React.FC = () => {
               width={28}
               height={28}
               radius={10}
-              onClick={() => {
-                console.log("yes");
-              }}
+              href={navigationLink(dayData.address)}
             />
           </Box>
         </Box>
@@ -88,7 +103,7 @@ const TodaysInformation: React.FC = () => {
           </Box>
           <Box sx={{ ...typography_box_sx }}>
             <Typography variant="h4" sx={{ ...typography_design_sx }}>
-              09:00 AM - 18:00 PM
+              {`${dayData.hours[0]} - ${dayData.hours[1]}`}
             </Typography>
           </Box>
         </Box>
@@ -101,7 +116,7 @@ const TodaysInformation: React.FC = () => {
           </Box>
           <Box sx={{ ...typography_box_sx }}>
             <Typography variant="h4" sx={{ ...typography_design_sx }}>
-              Yarden
+              {dayData.mentorName}
             </Typography>
           </Box>
           <Box
@@ -119,9 +134,7 @@ const TodaysInformation: React.FC = () => {
               width={28}
               height={28}
               radius={10}
-              onClick={() => {
-                console.log("yes");
-              }}
+              href={"https://www.whatsapp.com"}
             />
             <TodaysInformationButton
               src="./assets/Icons/buttonsIcons/calling_icon.svg"
@@ -130,7 +143,7 @@ const TodaysInformation: React.FC = () => {
               height={28}
               radius={10}
               onClick={() => {
-                console.log("yes");
+                console.log(`calling ${dayData.mentorPhone}`);
               }}
             />
           </Box>
@@ -159,9 +172,7 @@ const TodaysInformation: React.FC = () => {
               width={50}
               height={50}
               radius={16}
-              onClick={() => {
-                console.log("yes");
-              }}
+              href={`${dayData.googleMeet}`}
             />
             <TodaysInformationButton
               src="./assets/Icons/buttonsIcons/copy_icon.svg"
@@ -170,7 +181,7 @@ const TodaysInformation: React.FC = () => {
               height={50}
               radius={16}
               onClick={() => {
-                console.log("yes");
+                console.log(`copied ${dayData.googleMeet}`);
               }}
             />
           </Box>
@@ -214,13 +225,11 @@ const TodaysInformation: React.FC = () => {
             width={40}
             height={40}
             radius={13}
-            onClick={() => {
-              console.log("yes");
-            }}
+            href={`${dayData.dailyClassRoom}`}
           />
         </Box>
 
-        {["Event 1", "Event 2","Event 3"].map((event) => {
+        {dayData.events.map((event) => {
           return (
             <Box
               sx={{
@@ -238,7 +247,7 @@ const TodaysInformation: React.FC = () => {
                 variant="h6"
                 sx={{ color: "white", fontWeight: "bold" }}
               >
-                {event}
+                {event.eventName}
               </Typography>
             </Box>
           );

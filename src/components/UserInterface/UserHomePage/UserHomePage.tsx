@@ -1,8 +1,5 @@
 import * as React from "react";
-import dayjs, { Dayjs } from "dayjs";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DateCalendar } from "@mui/x-date-pickers/DateCalendar";
+
 import { Typography, Box } from "@mui/material";
 import UserNavBar from "../UserInterface Components/UserNavBar/UserNavBar";
 import TodaysInformation from "../UserInterface Components/TodaysInformation/TodaysInformation";

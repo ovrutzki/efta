@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import IDay from "../components/types/interfaces/inetfaces";
+import IDay from "../components/types/interfaces/interfaces";
 import daysSlicer from "./slicers/daysSlicer";
 
 
 export interface RootState {
  days:{
-    TodaysValue: IDay[],
+    TodaysValue: IDay,
     AllDaysDataValue: IDay[],
  }
 }
@@ -13,6 +13,6 @@ export interface RootState {
 export default configureStore({
   reducer: {
     days: daysSlicer,
-    
+
   },
 });

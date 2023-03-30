@@ -1,15 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import IDay from "../../components/types/interfaces/inetfaces";
+import IDay from "../../components/types/interfaces/interfaces";
+import sample from "../../data/sample.json"
 
 export const daysSlicer = createSlice({
   name: "days",
   initialState: {
-    TodaysValue: [] as IDay[],
+    TodaysValue: {} as IDay,
     AllDaysDataValue: [] as IDay[],
   },
   reducers: {
-    getTodaysValue: (state, action) => {
-    //   state.value.push(TodaysValue);
+    getTodaysValue: (state) => {
+      state.TodaysValue =  sample;
     },
     getAllDaysDataValue: (state, action) => {
     //   state.value.push(AllDaysDataValue);

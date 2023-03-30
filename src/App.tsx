@@ -6,6 +6,9 @@ import * as mui from "@mui/material";
 import { ThemeProvider } from "@mui/material";
 import SignUpLogInComponent from "./components/SignUpLogInComponents/SignUpLogInComponent";
 import MondayIntegration from "./components/SignUpLogInComponents/MondayIntegration";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getTodaysValue } from "./store/slicers/daysSlicer";
 
 const theme = mui.createTheme({
   palette: {
@@ -23,6 +26,14 @@ const theme = mui.createTheme({
 }});
 
 function App() {
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+  }, []);
+  
+  dispatch(getTodaysValue());
+
   return (
     <ThemeProvider theme={theme}>
       <mui.CssBaseline>
