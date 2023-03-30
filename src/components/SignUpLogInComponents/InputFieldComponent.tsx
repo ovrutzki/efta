@@ -77,11 +77,11 @@ const InputFieldComponent: React.FC<IInputFieldComponent> = (props) => {
     width: "100%",
     color: "white",
     ...(props.inputType === "date" && {
+      display:"black",
       appearance: "none",
-      WebkitAppearance: "none",
-      position:"relative",
-      
-      backgroundColor: "#fff",
+      WebkitAppearance: "textfield",  
+      MozAppearance:"textfield",    
+      // backgroundColor: "#fff",
       // border: "1px solid #ccc",
       // borderRadius: "4px",
       // padding: "8px",
