@@ -81,7 +81,7 @@ const InputFieldComponent: React.FC<IInputFieldComponent> = (props) => {
       WebkitAppearance: "none",
       position:"relative",
       
-      // backgroundColor: "#fff",
+      backgroundColor: "#fff",
       // border: "1px solid #ccc",
       // borderRadius: "4px",
       // padding: "8px",
