@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as mui from "@mui/material";
 import { Box, Typography } from "@mui/material";
 import TodaysInformationButton from "./TodaysInformationButtton";
-import { useSelector } from "react-redux/es/exports";
+import { useDispatch, useSelector } from "react-redux/es/exports";
 import { RootState } from "../../../../store/store";
 import IDay from "../../../types/interfaces/interfaces";
 
@@ -10,7 +10,6 @@ const square_box_sx = {
   borderRadius: "16px",
   marginBottom: "15px",
   height: "135px",
-  // width: "165px",
   width: "calc((100% - 15px)/2)",
 
   backgroundColor: "#C7CAD2",
@@ -40,15 +39,13 @@ const typography_design_sx = {
 };
 const TodaysInformation: React.FC = () => {
 
-  const dayData = useSelector((state:RootState)=> state.days.TodaysValue)
+
+  const dayData = useSelector((state:RootState)=> state.days.selectedDayValue)
 
   const navigationLink = (address:string) => {
     const googleApiLink =  "https://www.google.com/maps/search/?api=1&query="
     const punctRegex = /[ ,.:;]/g;
     const organizedAddress = address.split(punctRegex).join("+");
-    
-    // const organizedAddress = address.split(", ").join("+")
-    console.log(organizedAddress)
     return `${googleApiLink}${organizedAddress}`
   }
   

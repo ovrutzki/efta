@@ -5,7 +5,7 @@ import daysSlicer from "./slicers/daysSlicer";
 
 export interface RootState {
  days:{
-    TodaysValue: IDay,
+    selectedDayValue: IDay,
     AllDaysDataValue: IDay[],
  }
 }
@@ -16,3 +16,5 @@ export default configureStore({
 
   },
 });
+
+

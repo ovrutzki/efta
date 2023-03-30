@@ -1,9 +1,14 @@
 import { Box, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import InputFieldComponent from "./InputFieldComponent";
 
 const SignUpLogInComponent: React.FC = () => {
+
+  const navigate = useNavigate()
+
   const [toggleValue, setToggleValue] = useState("log_in");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,14 +17,14 @@ const SignUpLogInComponent: React.FC = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [courseAdminCode, setCourseAdminCode] = useState("");
 
-useEffect(()=>{
-    setEmail("")
-    setPassword("")
-    setFirstName("")
-    setLastName("")
-    setPhoneNumber("")
-    setCourseAdminCode("")
-},[toggleValue])
+// useEffect(()=>{
+//     setEmail("")
+//     setPassword("")
+//     setFirstName("")
+//     setLastName("")
+//     setPhoneNumber("")
+//     setCourseAdminCode("")
+// },[toggleValue])
 
   const button_sx = {
     display: "flex",
@@ -31,6 +36,50 @@ useEffect(()=>{
     width: "24vw",
     letterSpacing: "0.8px",
   };
+
+
+  const logInFunction = async () =>{
+    try {
+      const response = await axios.post(
+        "https://efta-back.onrender.com/api/users/logIn",
+        { email:email, password:password }
+      );
+      if (response.status === 200) {
+        sessionStorage.setItem("user", JSON.stringify({token: response.data.token ,userInfo:response.data.user  }));
+
+        alert(response.data.message);
+
+        if (response.data.admin && response.data.haveCourse){
+          navigate("/admin")
+        }else if (response.data.admin){
+          navigate("/monday")
+        }else{
+          navigate("/")
+        }
+      } else {
+        alert(response.data);
+      }
+    } catch (error: any) {
+      alert(error.response.data);
+    }
+  }
+
+  const signUpFunction = async () =>{
+    try {
+      const response = await axios.post(
+        "https://efta-back.onrender.com/api/users/signUp",
+        { email:email, password:password,name:firstName, lastName:lastName, phone:phoneNumber, code:courseAdminCode }
+      );
+      if (response.status === 200) {
+        alert(response.data.message);
+        setToggleValue("log_in")
+      } else {
+        alert(response.data);
+      }
+    } catch (error: any) {
+      alert(error.response.data);
+    }
+  }
   return (
     <Box
       sx={{
@@ -165,10 +214,14 @@ useEffect(()=>{
           marginBottom:"20px"
         }}
 
-        onClick={()=>{
+        onClick={ async ()=>{
                 if (toggleValue==="log_in"){
-                    console.log("log in")
+                  console.log(email,password)
+                  logInFunction()
+                
+                  console.log("log in")
                 }else{
+                  signUpFunction()
                     console.log("sign up")
                 }
 

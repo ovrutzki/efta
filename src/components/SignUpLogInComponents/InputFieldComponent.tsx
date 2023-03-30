@@ -61,13 +61,7 @@ const InputFieldComponent: React.FC<IInputFieldComponent> = (props) => {
             letterSpacing:"0.8px"
         }}
       >
-        {/* <input
-          onChange={(event: any) => props.setValueFunction(event?.target.value)}
-          placeholder={props.placeholder}
-          type={props.inputType?props.inputType:"text"}
-          style={{ all: "unset", width: "100%", color: "white"
-        } as any }
-        /> */}
+
         <input
   onChange={(event: any) => props.setValueFunction(event?.target.value)}
   placeholder={props.placeholder}
@@ -81,12 +75,6 @@ const InputFieldComponent: React.FC<IInputFieldComponent> = (props) => {
       appearance: "none",
       WebkitAppearance: "textfield",  
       MozAppearance:"textfield",    
-      // backgroundColor: "#fff",
-      // border: "1px solid #ccc",
-      // borderRadius: "4px",
-      // padding: "8px",
-      // fontSize: "18px",
-      // textAlign: "center",
       width: "100%",
       minHeight:"1.2rem"
     })

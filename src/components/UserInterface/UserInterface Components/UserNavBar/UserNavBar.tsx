@@ -2,6 +2,20 @@ import React from "react";
 import { Box } from "@mui/material";
 import * as mui from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+
+const userString = sessionStorage.getItem("user");
+const user = userString ? JSON.parse(userString) : null;
+
+ const getDataFromMonday = async () => {
+  axios.get("https://efta-back.onrender.com/api/monday/getData",{
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${user.token}`,
+     
+    }
+  }).then(res=>{console.log(res)});
+};
 
 interface IUserRole{
   role:string
@@ -22,6 +36,7 @@ const UserNavBar: React.FC<IUserRole> = (props) => {
       <Box
 
         onClick={()=>{
+          getDataFromMonday()
           if (props.role==="admin"){
             console.log("Admin side bar")
           }else if (props.role==="user"){

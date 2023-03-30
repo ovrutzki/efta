@@ -8,7 +8,9 @@ import SignUpLogInComponent from "./components/SignUpLogInComponents/SignUpLogIn
 import MondayIntegration from "./components/SignUpLogInComponents/MondayIntegration";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { getTodaysValue } from "./store/slicers/daysSlicer";
+import { fetchAllDays } from "./store/slicers/daysSlicer";
+import  AppDispatch  from "./store/store";
+
 
 const theme = mui.createTheme({
   palette: {
@@ -27,12 +29,9 @@ const theme = mui.createTheme({
 
 function App() {
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-  }, []);
+  const dispatch = useDispatch<any>();
   
-  dispatch(getTodaysValue());
+  dispatch(fetchAllDays());
 
   return (
     <ThemeProvider theme={theme}>

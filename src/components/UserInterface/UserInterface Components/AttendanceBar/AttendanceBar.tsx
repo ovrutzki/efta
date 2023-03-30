@@ -2,20 +2,60 @@ import React, { useEffect, useState } from "react";
 import * as mui from "@mui/material";
 import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel, Slider, Typography } from "@mui/material";
 import { BorderColor } from "@mui/icons-material";
+import axios from "axios";
+import { RootState } from "../../../../store/store";
+import { useSelector } from "react-redux";
 
 const AttendanceBar: React.FC = () => {
+  
+  
+      const button_sx = {
+          display:"flex",
+          gap:"5px",
+          boxShadow: "none",
+          width:"fit-content",
+          height: "30px",
+          borderRadius: "16px",
+          px:1,
+          fontWeight: "400",
+          fontSize:"clamp(9px,3vw,15px)",
+          whiteSpace: 'nowrap'    }
 
-    const button_sx = {
-        display:"flex",
-        gap:"5px",
-        boxShadow: "none",
-        width:"fit-content",
-        height: "30px",
-        borderRadius: "16px",
-        px:1,
-        fontWeight: "400",
-        fontSize:"clamp(9px,3vw,15px)",
-        whiteSpace: 'nowrap'    }
+
+const updateAttendance = async (date:string, status:number) =>{
+  try {
+    const response = await axios.post(
+      "https://efta-back.onrender.com/api/attendance/attendanceUpdate",
+      {date:date, status:status},
+      {headers:{Authorization: `Bearer ${user.token}`}}
+    );
+    if (response.status === 200) {
+      alert(response.data.message);
+    } else {
+      alert(response.data);
+    }
+  } catch (error: any) {
+    alert(error.response.data);
+  }
+}
+
+const toNumericValue = (stringStatus:string)=>{
+  switch(stringStatus){
+    case "on_time":
+      return 0
+    case "not_today":
+      return -1
+    default:
+      return sliderValue
+  }
+}
+
+
+  const currentDate:string = useSelector((state:RootState)=>state.days.selectedDayValue.date)
+  console.log ("date", currentDate)
+
+  const userString = sessionStorage.getItem("user");
+  const user = userString ? JSON.parse(userString) : null;
 
 const [selectedAttendance, setSelectedAttendance ] = useState("on_time");
 const [open, setOpen] = React.useState(false);
@@ -39,6 +79,10 @@ const handleClickOpen = () => {
   useEffect(()=>{
     if (selectedAttendance === "on_time" || selectedAttendance === "not_today"){
     setSliderValue(-1);}
+
+// updateAttendance(currentDate,toNumericValue(selectedAttendance))
+console.log(selectedAttendance)
+
 
   },[selectedAttendance]
   )

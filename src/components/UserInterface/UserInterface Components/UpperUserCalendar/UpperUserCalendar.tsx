@@ -10,23 +10,27 @@ import {
   InputLabel,
   OutlinedInput,
   Select,
-  SelectChangeEvent,
   Typography,
 } from "@mui/material";
 import dayjs, { Dayjs } from "dayjs";
+import { useDispatch } from "react-redux";
+import  {filterSelectedDateDataInSlicer} from "../../../../store/slicers/daysSlicer"
 
 const UpperUserCalendar: React.FC = () => {
   const today = dayjs().format("MM-DD-YYYY");
   const [selectedDate, setSelectedDay] = React.useState(today);
   const [open, setOpen] = React.useState(false);
   const [month, setMonth] = React.useState<String>(dayjs().format("MMMM"));
-  const [monthNumber, setMonthNumber] = React.useState<Number>(0);
   const [year, setYear] = React.useState<number>(dayjs().year());
   const [temporaryChange, setTemporaryChange] = React.useState<
     [String, Number]
   >([month, year]);
 
+  const dispatch = useDispatch();
+
+
   useEffect(() => {
+      dispatch(filterSelectedDateDataInSlicer(selectedDate))
 
       setTimeout(() => {
         let day_to_scroll = document.getElementById(selectedDate);
@@ -200,7 +204,6 @@ const UpperUserCalendar: React.FC = () => {
         }}
       >
         {daysArray.map((day) => {
-          // {[[1,"er"],[2,"er"],[3,"er"]].map((day)=>{
           let month_for_box =
             months[`${month}`] < 10
               ? `0${months[`${month}`]}`

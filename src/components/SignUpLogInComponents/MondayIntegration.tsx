@@ -1,17 +1,42 @@
 import { Box, Button } from "@mui/material";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import InputFieldComponent from "./InputFieldComponent";
 
 const MondayIntegration: React.FC = () => {
+  const userString = sessionStorage.getItem("user");
+  const user = userString ? JSON.parse(userString) : null;
+
+    const navigate = useNavigate()
     
     const [createCourseCode, setCreateCourseCode] = useState("");
       const [boardId, setBoardId] = useState("");
       const [mondayToken, setMondayToken] = useState("");
-      const [courseOpening, setCourseOpening] = useState("");
-      const [courseLastDay, setCourseLastDay] = useState("");
       const [classroomLink, setClassroomLink] = useState("");
       const [startingDate, setStartingDate] = useState("");
       const [endingDate, setEndingDate] = useState("");
+
+      const createCourseFunction = async () =>{
+
+        console.log(user.token)
+        console.log(user)
+        try {
+          const response = await axios.post(
+            "https://efta-back.onrender.com/api/course/addingMonday",
+            { mondayToken:mondayToken, boardId:boardId, startDate:startingDate, endDate:endingDate,classRoomLink:classroomLink,courseCode:createCourseCode},
+            {headers:{Authorization: `Bearer ${user.token}`}}
+          );
+          if (response.status === 200) {
+            alert(response.data.message);
+            navigate("/admin")
+          } else {
+            alert(response.data);
+          }
+        } catch (error: any) {
+          alert(error.response.data);
+        }
+      }
 
 
       const modifyDate = (date:string) => {
@@ -99,13 +124,13 @@ return(<>
         headline="Course Starting Date"
         inputType="date"
         placeholder=""
-        setValueFunction={setStartingDate}
+        setValueFunction={(value)=>setStartingDate(modifyDate(value))}
         />
         <InputFieldComponent
         headline="Course Ending Date"
         inputType="date"
         placeholder=""
-        setValueFunction={setEndingDate}
+        setValueFunction={(value)=>setEndingDate(modifyDate(value))}
         />
         
       </Box>
@@ -119,8 +144,8 @@ return(<>
           marginBottom:"15px"
         }}
 
-        onClick={()=>{
-
+        onClick={async()=>{
+          createCourseFunction()
         }}
       >
         TAKE ME TO EFTA !
