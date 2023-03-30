@@ -1,5 +1,5 @@
 import { Box, Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputFieldComponent from "./InputFieldComponent";
 
 const MondayIntegration: React.FC = () => {
@@ -10,6 +10,16 @@ const MondayIntegration: React.FC = () => {
       const [courseOpening, setCourseOpening] = useState("");
       const [courseLastDay, setCourseLastDay] = useState("");
       const [classroomLink, setClassroomLink] = useState("");
+      const [startingDate, setStartingDate] = useState("");
+      const [endingDate, setEndingDate] = useState("");
+
+
+      const modifyDate = (date:string) => {
+        const dateSplit = date.split("-")
+        const printableDate = `${dateSplit[1]}-${dateSplit[2]}-${dateSplit[0]}`
+        return printableDate
+      }
+
 
 return(<>
 <Box
@@ -84,6 +94,18 @@ return(<>
         questionMarkSrc="https://support.google.com/edu/classroom/answer/6020282?hl=en&co=GENIE.Platform%3DDesktop#zippy=%2Cinvite-students-with-an-invite-link"
         placeholder=""
         setValueFunction={setClassroomLink}
+        />
+        <InputFieldComponent
+        headline="Course Starting Date"
+        inputType="date"
+        placeholder=""
+        setValueFunction={setStartingDate}
+        />
+        <InputFieldComponent
+        headline="Course Ending Date"
+        inputType="date"
+        placeholder=""
+        setValueFunction={setEndingDate}
         />
         
       </Box>
