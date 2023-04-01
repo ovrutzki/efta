@@ -4,8 +4,8 @@ import { Box, Typography } from "@mui/material";
 import TodaysInformationButton from "./TodaysInformationButtton";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { RootState } from "../../../../store/store";
-import IDay from "../../../types/interfaces/interfaces";
-import { filterSelectedDateDataInSlicer } from "../../../../store/slicers/daysSlicer";
+import { useNavigate } from "react-router-dom";
+import { fetchAllDays } from "../../../../store/slicers/daysSlicer";
 
 const square_box_sx = {
   borderRadius: "16px",
@@ -30,25 +30,41 @@ const typography_box_sx = {
   left: "10px",
   top: "10px",
   width: "75%",
-  height: "50%",
+  height: "50%", overflow:"auto"
 };
 const typography_design_sx = {
   color: "white",
   fontWeight: "bold",
   letterSpacing: "0.5px",
   fontSize: "20px",
+
 };
 const TodaysInformation: React.FC = () => {
+  const dispatch = useDispatch<any>()
 
-  const dispatch = useDispatch()
+  window.onload = function() {
+    dispatch(fetchAllDays());
+  }
+
+
 
   const data_is_ready = useSelector((state:RootState)=> state.days.is_data_ready)
 
 
   const dayData = useSelector((state:RootState)=> state.days.selectedDayValue)
-if (!data_is_ready){
-        // dispatch(filterSelectedDateDataInSlicer("04-01-2023"))
 
+
+  const userString = sessionStorage.getItem("user");
+  const user = userString ? JSON.parse(userString) : null;
+  const navigate = useNavigate()
+
+if (!user){
+  return <>
+  <div>Please sign in to view today's information.</div>
+  <mui.Button variant="contained" sx={{backgroundColor:"secondary.light"}} onClick={()=>{navigate("/sign-in")}}>Sign in</mui.Button>
+  </>
+}
+if (!data_is_ready){
 return <div>"loading today info..."</div>
 }
 

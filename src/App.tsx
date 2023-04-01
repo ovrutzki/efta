@@ -29,9 +29,7 @@ const theme = mui.createTheme({
 
 function App() {
 
-  const dispatch = useDispatch<any>();
-  
-  dispatch(fetchAllDays());
+
 
   return (
     <ThemeProvider theme={theme}>

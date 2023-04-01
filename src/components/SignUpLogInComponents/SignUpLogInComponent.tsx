@@ -2,7 +2,9 @@ import { Box, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { fetchAllDays } from "../../store/slicers/daysSlicer";
 import InputFieldComponent from "./InputFieldComponent";
 
 const SignUpLogInComponent: React.FC = () => {
@@ -54,10 +56,12 @@ const SignUpLogInComponent: React.FC = () => {
         alert(response.data.message);
 
         if (response.data.admin && response.data.haveCourse){
+          dispatch(fetchAllDays());
           navigate("/admin")
         }else if (response.data.admin){
           navigate("/monday")
         }else{
+          dispatch(fetchAllDays());
           navigate("/")
         }
       } else {
@@ -88,6 +92,8 @@ const SignUpLogInComponent: React.FC = () => {
       alert(error.response.data);
     }
   }
+
+  const dispatch = useDispatch<any>();
   return (
     <Box
       sx={{
@@ -232,6 +238,10 @@ const SignUpLogInComponent: React.FC = () => {
                   signUpFunction()
                     console.log("sign up")
                 }
+
+
+
+
 
         }}
       >

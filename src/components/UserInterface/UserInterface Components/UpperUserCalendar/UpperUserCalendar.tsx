@@ -13,8 +13,9 @@ import {
   Typography,
 } from "@mui/material";
 import dayjs, { Dayjs } from "dayjs";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import  {filterSelectedDateDataInSlicer} from "../../../../store/slicers/daysSlicer"
+import { RootState } from "../../../../store/store";
 
 const UpperUserCalendar: React.FC = () => {
   const today = dayjs().format("MM-DD-YYYY");
@@ -28,9 +29,17 @@ const UpperUserCalendar: React.FC = () => {
 
   const dispatch = useDispatch();
 
+  const data_is_ready = useSelector((state:RootState)=> state.days.is_data_ready)
+  const dates_with_data = useSelector((state:RootState)=> state.days.dates_with_data)
+
+  useEffect(()=>{
+    dispatch(filterSelectedDateDataInSlicer(selectedDate))
+    // console.log(dates_with_data);
+},[data_is_ready,selectedDate])
+
+
 
   useEffect(() => {
-      dispatch(filterSelectedDateDataInSlicer(selectedDate))
 
       setTimeout(() => {
         let day_to_scroll = document.getElementById(selectedDate);
@@ -208,6 +217,11 @@ const UpperUserCalendar: React.FC = () => {
             months[`${month}`] < 10
               ? `0${months[`${month}`]}`
               : `${months[`${month}`]}`;
+
+              // console.log(`${month_for_box}-${day[0]}-${year}`)
+              if (!dates_with_data.includes(`${month_for_box}-${day[0]}-${year}`)){
+                return
+              }
           return (
             <Box
             id={`${month_for_box}-${day[0]}-${year}`}

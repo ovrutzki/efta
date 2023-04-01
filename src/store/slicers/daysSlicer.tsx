@@ -35,21 +35,19 @@ export const daysSlicer = createSlice({
     initialState: {
         selectedDayValue: sample as IDay,
         allDaysDataValue: [] as IDay[],
-        is_data_ready : false
+        is_data_ready : false,
+        dates_with_data : [] as string[]
     },
     reducers: {
         filterSelectedDateDataInSlicer: (state,action) => {
-            console.log(action.payload)
-            console.log(state.allDaysDataValue)
+            // console.log(action.payload)
+            // console.log(state.allDaysDataValue)
             const dayToDisplay = state.allDaysDataValue.find((day)=> day.date === action.payload )
-            console.log(dayToDisplay)
+            // console.log(dayToDisplay)
             if (dayToDisplay){
                 state.selectedDayValue = dayToDisplay;
             }
-
         },
-
-
     },
     extraReducers: (builder) => {
         builder
@@ -58,8 +56,15 @@ export const daysSlicer = createSlice({
             })
             .addCase(fetchAllDays.fulfilled, (state, action) => {
                 state.allDaysDataValue = action.payload;
-                console.log(action.payload)
-                console.log(state.allDaysDataValue)
+                // console.log(action.payload)
+                // console.log(state.allDaysDataValue)
+
+                const dates:string[]=[];
+                for (let i =0;i<action.payload.length;i++){
+                   dates.push(action.payload[i].date)
+                }
+                state.dates_with_data=dates
+                // console.log(dates);
 
                 state.is_data_ready = true
                 console.log("ready")

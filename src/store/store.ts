@@ -7,7 +7,9 @@ export interface RootState {
  days:{
     selectedDayValue: IDay,
     AllDaysDataValue: IDay[],
-    is_data_ready:boolean
+    is_data_ready:boolean,
+    dates_with_data :string[]
+
  }
 }
 
