@@ -1,81 +1,76 @@
-export {}
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+import {IAttendance} from "../../components/types/interfaces/interfaces";
+import attendanceSample from "../../data_samples/attendance_sample.json";
 
-// import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-// import { Action } from "@remix-run/router";
-// import axios from "axios";
-// import IDay from "../../components/types/interfaces/interfaces";
-// import sample from "../../data/sample.json"
- 
+export const fetchAllAttendance = createAsyncThunk(
+  "days/fetchAllAttendance",
+  async () => {
+    const userString = sessionStorage.getItem("user");
+    const user = userString ? JSON.parse(userString) : null;
+    const response = await axios.get(
+      "https://efta-back.onrender.com/api/attendance/allDaysAttendance",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
 
-// export const fetchAllDays = createAsyncThunk(
-//     "days/fetchAllDays",
-//     async () => {
-//         const userString = sessionStorage.getItem("user");
-//         const user = userString ? JSON.parse(userString) : null;
-//         const response = await axios.get("https://efta-back.onrender.com/api/days", 
-//         { headers: { 
-//             "Content-Type": "application/json"  ,
-//             Authorization: `Bearer ${user.token}`}
-//             });
+    return response.data;
+  }
+);
 
-//         return response.data;
-//     }
-// );
+export const fetchSelectedDayAttendance = createAsyncThunk(
+  "days/fetchSelectedDayAttendance",
+  async (date: string) => {
+    const userString = sessionStorage.getItem("user");
+    const user = userString ? JSON.parse(userString) : null;
+    const response = await axios.get(
+      "https://efta-back.onrender.com/api/attendance/singleDayAttendance",
+      {
+        data: { date: date },
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    return response.data;
+  }
+);
 
+export const attendanceSlicer = createSlice({
+  name: "attendance",
+  initialState: {
+    selectedDayAttendanceValue: attendanceSample as IAttendance,
+    allDaysAttendanceValue: [] as IAttendance[],
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchAllAttendance.pending, (state) => {
+        console.log("fetching all attendance");
+      })
+      .addCase(fetchAllAttendance.fulfilled, (state, action) => {
+        state.allDaysAttendanceValue = action.payload;
+        console.log("done all attendance");
+      })
+      .addCase(fetchAllAttendance.rejected, (state, action) => {
+        console.log(action.error.message);
+      })
+      .addCase(fetchSelectedDayAttendance.pending, (state) => {
+        console.log("fetching single day attendance");
+      })
+      .addCase(fetchSelectedDayAttendance.fulfilled, (state, action) => {
+        state.selectedDayAttendanceValue = action.payload;
+        console.log("done single day attendance");
+      })
+      .addCase(fetchSelectedDayAttendance.rejected, (state, action) => {
+        console.log(action.error.message);
+      });
+  },
+});
 
-// export const fetchSelectedDay = createAsyncThunk(
-//     "days/fetchSelectedDay",
-//     async (date: string) => {
-//         const userString = sessionStorage.getItem("user");
-//         const user = userString ? JSON.parse(userString) : null;
-//         const response = await axios.get("https://efta-back.onrender.com/api/days/getOneDay", {data: { date: date }, headers: { Authorization: `Bearer ${user.token}`,"Content-Type": "application/json" } });
-//         return response.data;
-//     }
-// );
-
-// export const daysSlicer = createSlice({
-//     name: "days",
-//     initialState: {
-//         selectedDayValue: sample as IDay,
-//         allDaysDataValue: [] as IDay[],
-//     },
-//     reducers: {
-//         filterSelectedDateDataInSlicer: (state,action) => {
-//             console.log(action.payload)
-//             console.log(state.allDaysDataValue)
-//             const dayToDisplay = state.allDaysDataValue.find((day)=> day.date === action.payload )   
-//             console.log(dayToDisplay)
-//             if (dayToDisplay){
-//                 state.selectedDayValue = dayToDisplay;
-//             }else{
-//                 state.selectedDayValue = sample;
-//             }
-
-//         },
-        
-
-//     },
-//     extraReducers: (builder) => {
-//         builder
-//             .addCase(fetchAllDays.pending, (state) => {})
-//             .addCase(fetchAllDays.fulfilled, (state, action) => {
-//                 state.allDaysDataValue = action.payload;
-//                 console.log("yes")
-//             })
-//             .addCase(fetchAllDays.rejected, (state, action) => {
-//                 console.log(action.error.message);
-//             })
-//             .addCase(fetchSelectedDay.pending, (state) => {})
-//             .addCase(fetchSelectedDay.fulfilled, (state, action) => {
-//                 state.selectedDayValue = action.payload;
-//             })
-//             .addCase(fetchSelectedDay.rejected, (state, action) => {
-//                 console.log(action.error.message);
-//             });
-//     },
-// });
-
-// export const { filterSelectedDateDataInSlicer } = daysSlicer.actions;
-
-
-// export default daysSlicer.reducer;
+export default attendanceSlicer.reducer;

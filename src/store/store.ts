@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import IDay from "../components/types/interfaces/interfaces";
+import  { IDay,IAttendance } from "../components/types/interfaces/interfaces";
+import attendanceSlicer from "./slicers/attendanceSlicer";
 import daysSlicer from "./slicers/daysSlicer";
 
 
@@ -8,16 +9,19 @@ export interface RootState {
     selectedDayValue: IDay,
     AllDaysDataValue: IDay[],
     is_data_ready:boolean,
-    dates_with_data :string[]
-
+    is_weekend:boolean,
+    dates_with_data : string[]
+ },
+ attendance:{
+  selectedDayAttendanceValue: IAttendance,
+  allDaysAttendanceValue: IAttendance[],
  }
 }
 
 export default configureStore({
   reducer: {
     days: daysSlicer,
+    attendance: attendanceSlicer,
 
   },
 });
-
-

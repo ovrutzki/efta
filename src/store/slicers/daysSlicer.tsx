@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import IDay from "../../components/types/interfaces/interfaces";
-import sample from "../../data/sample.json"
+import {IDay} from "../../components/types/interfaces/interfaces";
+import daySample from "../../data_samples/day_sample.json"
 
 
 export const fetchAllDays = createAsyncThunk(
@@ -33,21 +33,24 @@ export const fetchSelectedDay = createAsyncThunk(
 export const daysSlicer = createSlice({
     name: "days",
     initialState: {
-        selectedDayValue: sample as IDay,
+        selectedDayValue: daySample as IDay,
         allDaysDataValue: [] as IDay[],
         is_data_ready : false,
-        dates_with_data : [] as string[]
+        dates_with_data : [] as string[],
+        is_weekend: false
     },
     reducers: {
         filterSelectedDateDataInSlicer: (state,action) => {
-            // console.log(action.payload)
-            // console.log(state.allDaysDataValue)
+
             const dayToDisplay = state.allDaysDataValue.find((day)=> day.date === action.payload )
-            // console.log(dayToDisplay)
+
             if (dayToDisplay){
                 state.selectedDayValue = dayToDisplay;
             }
         },
+        filterIsWeekend:(state,action) =>{
+            state.is_weekend =action.payload
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -56,15 +59,11 @@ export const daysSlicer = createSlice({
             })
             .addCase(fetchAllDays.fulfilled, (state, action) => {
                 state.allDaysDataValue = action.payload;
-                // console.log(action.payload)
-                // console.log(state.allDaysDataValue)
-
                 const dates:string[]=[];
                 for (let i =0;i<action.payload.length;i++){
                    dates.push(action.payload[i].date)
                 }
                 state.dates_with_data=dates
-                // console.log(dates);
 
                 state.is_data_ready = true
                 console.log("ready")
@@ -82,7 +81,7 @@ export const daysSlicer = createSlice({
     },
 });
 
-export const { filterSelectedDateDataInSlicer } = daysSlicer.actions;
+export const { filterSelectedDateDataInSlicer, filterIsWeekend } = daysSlicer.actions;
 
 
 export default daysSlicer.reducer;

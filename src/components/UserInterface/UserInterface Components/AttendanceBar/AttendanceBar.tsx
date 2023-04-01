@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import * as mui from "@mui/material";
 import {
   Box,
   Button,
@@ -12,7 +11,6 @@ import {
   Slider,
   Typography,
 } from "@mui/material";
-import { BorderColor } from "@mui/icons-material";
 import axios from "axios";
 import { RootState } from "../../../../store/store";
 import { useSelector } from "react-redux";
@@ -68,6 +66,9 @@ const AttendanceBar: React.FC = () => {
     (state: RootState) => state.days.selectedDayValue.date
   );
 
+  const is_weekend_selected = useSelector((state:RootState)=> state.days.is_weekend)
+
+
   const userString = sessionStorage.getItem("user");
   const user = userString ? JSON.parse(userString) : null;
 
@@ -103,6 +104,11 @@ const AttendanceBar: React.FC = () => {
       console.log(selectedAttendance);
     }
   }, [selectedAttendance]);
+
+
+if (is_weekend_selected){
+  return <Box sx={{my:"15px"}}></Box>
+}
 
   return (
     <>

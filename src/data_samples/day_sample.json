@@ -1,0 +1,41 @@
+{
+    "_id": "",
+    "dayNumber": 1,
+    "date": "",
+    "events": [
+      {
+        "eventName": "",
+        "link": "",
+        "_id": ""
+      },
+      {
+        "eventName": "",
+        "link": "",
+        "_id": ""
+      }
+    ],
+    "mentorName": "",
+    "mentorPhone": "",
+    "address": "",
+    "hours": [
+      "",
+      ""
+    ],
+    "dailyClassRoom": "",
+    "googleMeet": "",
+    "guestLecturer": false,
+    "attendance": [
+      {
+        "studentName": "",
+        "status": 3,
+        "_id": ""
+      },
+      {
+        "studentName": "",
+        "status": 1,
+        "_id": ""
+      }
+    ],
+    "courseCode":"",
+    "__v": 0
+  }

@@ -88,7 +88,7 @@ const UserNavBar: React.FC<IUserRole> = (props) => {
           borderRadius:"16px 0 0 16px",
           backgroundColor:"#989CA9"
   }}>
-        <mui.Typography onClick={()=>{props.role === "admin" ? navigate("/"):navigate("/admin")}} variant="subtitle2" sx={{color:"white", fontWeight:"bold", letterSpacing:"0.5px"}}>{"Assaf".toUpperCase()}</mui.Typography>
+        <mui.Typography onClick={()=>{props.role === "admin" ? navigate("/"):navigate("/admin")}} variant="subtitle2" sx={{color:"white", fontWeight:"bold", letterSpacing:"0.5px"}}>{user.userInfo.name ? user.userInfo.name.toUpperCase(): "NAME"}</mui.Typography>
         </Box>
     </Box>
 

@@ -49,6 +49,7 @@ const TodaysInformation: React.FC = () => {
 
 
   const data_is_ready = useSelector((state:RootState)=> state.days.is_data_ready)
+  const is_weekend_selected = useSelector((state:RootState)=> state.days.is_weekend)
 
 
   const dayData = useSelector((state:RootState)=> state.days.selectedDayValue)
@@ -58,6 +59,14 @@ const TodaysInformation: React.FC = () => {
   const user = userString ? JSON.parse(userString) : null;
   const navigate = useNavigate()
 
+  const navigationLink = (address:string) => {
+    const googleApiLink =  "https://www.google.com/maps/search/?api=1&query="
+    const punctRegex = /[ ,.:;]/g;
+    const organizedAddress = address.split(punctRegex).join("+");
+    return `${googleApiLink}${organizedAddress}`
+  }
+
+
 if (!user){
   return <>
   <div>Please sign in to view today's information.</div>
@@ -65,15 +74,34 @@ if (!user){
   </>
 }
 if (!data_is_ready){
-return <div>"loading today info..."</div>
+return     <>
+<style>
+  {`
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(-360deg); }
+    }
+  `}
+</style>
+<Box
+  sx={{
+
+    animation: 'spin .6s linear infinite'
+  }}
+>
+  <img src="./assets/logo/logo.png" style={{height:"100px"}} />
+</Box>
+
+Loading..
+</>
 }
 
-  const navigationLink = (address:string) => {
-    const googleApiLink =  "https://www.google.com/maps/search/?api=1&query="
-    const punctRegex = /[ ,.:;]/g;
-    const organizedAddress = address.split(punctRegex).join("+");
-    return `${googleApiLink}${organizedAddress}`
-  }
+
+if (is_weekend_selected){
+return <Box sx={{ marginBottom:"15px",display: "flex", justifyContent: "center", alignItems: "center", width: "90%", boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)", overflow: "hidden", borderRadius: "16px" }}>
+  <img src="./assets/mainBG/weekend_efta.png" style={{ objectFit: "cover", height: "100%", opacity:"90%" , marginLeft:"20px"}} />
+</Box>
+}
 
 
   return (

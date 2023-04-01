@@ -120,7 +120,7 @@ const AdminHomePage: React.FC = () => {
       </Box>
       <Box
         sx={{
-          my: "15px",
+          marginTop: "15px",
           display: "flex",
           justifyContent: "space-between",
           width: "90%",

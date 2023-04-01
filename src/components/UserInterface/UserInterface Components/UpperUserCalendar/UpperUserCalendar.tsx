@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import dayjs, { Dayjs } from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
-import  {filterSelectedDateDataInSlicer} from "../../../../store/slicers/daysSlicer"
+import  {filterSelectedDateDataInSlicer, filterIsWeekend} from "../../../../store/slicers/daysSlicer"
 import { RootState } from "../../../../store/store";
 
 const UpperUserCalendar: React.FC = () => {
@@ -34,7 +34,16 @@ const UpperUserCalendar: React.FC = () => {
 
   useEffect(()=>{
     dispatch(filterSelectedDateDataInSlicer(selectedDate))
-    // console.log(dates_with_data);
+    for(let i = 0; i<daysArray.length;i++){
+      if(daysArray[i][0] == selectedDate.split("-")[1]){
+        if (daysArray[i][1] === "Fr" || daysArray[i][1] === "Sa" ){
+          console.log("weekend")
+          dispatch(filterIsWeekend(true))
+          break;
+        }
+      }
+      dispatch(filterIsWeekend(false))
+    }
 },[data_is_ready,selectedDate])
 
 
@@ -65,7 +74,7 @@ const UpperUserCalendar: React.FC = () => {
   };
 
   const daysInMonth = new Date(year, months[`${month}`], 0).getDate();
-  const daysArray = [];
+  const daysArray:any = [];
   for (let day = 1; day <= daysInMonth; day++) {
     const date = new Date(year, months[`${month}`] - 1, day);
     const dayOfWeek = date.toLocaleString("en-US", { weekday: "short" });
@@ -212,21 +221,29 @@ const UpperUserCalendar: React.FC = () => {
           },
         }}
       >
-        {daysArray.map((day) => {
+        {daysArray.map((day:any) => {
           let month_for_box =
             months[`${month}`] < 10
               ? `0${months[`${month}`]}`
               : `${months[`${month}`]}`;
 
-              // console.log(`${month_for_box}-${day[0]}-${year}`)
-              if (!dates_with_data.includes(`${month_for_box}-${day[0]}-${year}`)){
-                return
+              let is_study_day:boolean = false;
+              let is_weekend:boolean = false;
+              if (dates_with_data.includes(`${month_for_box}-${day[0]}-${year}`)){
+                is_study_day = true
+                if(day[1] ==="Fr" || day[1] ==="Sa"){
+                  is_weekend = true;
+                  is_study_day = false
+                }
               }
           return (
             <Box
             id={`${month_for_box}-${day[0]}-${year}`}
-              onClick={() =>
-                setSelectedDay(`${month_for_box}-${day[0]}-${year}`)
+              onClick={() =>{
+                if (is_study_day || is_weekend){
+                  setSelectedDay(`${month_for_box}-${day[0]}-${year}`)
+                }
+              }
               }
               sx={{
                 display: "flex",
@@ -242,7 +259,7 @@ const UpperUserCalendar: React.FC = () => {
                 backgroundColor:
                   selectedDate === `${month_for_box}-${day[0]}-${year}`
                     ? "#4E4E61"
-                    : "#989CA9",
+                    : is_study_day? "#989CA9" : is_weekend ? "#989ca971" : "#d956474d",
                 borderRadius: "16px",
               }}
             >
@@ -267,6 +284,8 @@ const UpperUserCalendar: React.FC = () => {
                   {day[1]}
                 </Typography>
               </Typography>
+              {is_study_day || is_weekend?<></>:<img src="./assets/Icons/no_info_icon.svg" style={{height:"20px"}}/>}
+              {is_weekend? <img src="./assets/Icons/weekend_efta_bunny.png" style={{position:"relative",top:"8px",height:"35px"}}/>  :<></>}
             </Box>
           );
         })}

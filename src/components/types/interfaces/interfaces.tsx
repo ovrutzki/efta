@@ -1,4 +1,4 @@
-export default interface IDay {
+export  interface IDay {
     _id: string;
     dayNumber: number;
     date: string;
@@ -10,7 +10,7 @@ export default interface IDay {
     dailyClassRoom: string;
     googleMeet: string;
     guestLecturer: boolean;
-    attendance: IAttendance[];
+    attendance: IAttendanceForIDay[];
     courseCode:string;
     __v: number;
   }
@@ -19,11 +19,17 @@ export default interface IDay {
       link: string;
       _id: string;
     }
-    
-   interface IAttendance {
+
+   interface IAttendanceForIDay {
       studentName: string;
       status: number;
       _id: string;
     }
-    
-    
+
+export  interface IAttendance {
+  date:string;
+  studentName: string;
+  phone:string;
+  status: number;
+  _id: string;
+}
