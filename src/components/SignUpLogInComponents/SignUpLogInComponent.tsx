@@ -42,7 +42,11 @@ const SignUpLogInComponent: React.FC = () => {
     try {
       const response = await axios.post(
         "https://efta-back.onrender.com/api/users/logIn",
-        { email:email, password:password }
+        { email:email, password:password },
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }}
       );
       if (response.status === 200) {
         sessionStorage.setItem("user", JSON.stringify({token: response.data.token ,userInfo:response.data.user  }));
@@ -68,7 +72,11 @@ const SignUpLogInComponent: React.FC = () => {
     try {
       const response = await axios.post(
         "https://efta-back.onrender.com/api/users/signUp",
-        { email:email, password:password,name:firstName, lastName:lastName, phone:phoneNumber, code:courseAdminCode }
+        { email:email, password:password,name:firstName, lastName:lastName, phone:phoneNumber, code:courseAdminCode },
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }}
       );
       if (response.status === 200) {
         alert(response.data.message);
@@ -218,7 +226,7 @@ const SignUpLogInComponent: React.FC = () => {
                 if (toggleValue==="log_in"){
                   console.log(email,password)
                   logInFunction()
-                
+
                   console.log("log in")
                 }else{
                   signUpFunction()

@@ -210,7 +210,7 @@ const UpperUserCalendar: React.FC = () => {
               : `${months[`${month}`]}`;
           return (
             <Box
-              id={`${month_for_box}-${day[0]}-${year}`}
+            id={`${month_for_box}-${day[0]}-${year}`}
               onClick={() =>
                 setSelectedDay(`${month_for_box}-${day[0]}-${year}`)
               }

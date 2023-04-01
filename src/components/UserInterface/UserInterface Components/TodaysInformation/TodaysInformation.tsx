@@ -5,6 +5,7 @@ import TodaysInformationButton from "./TodaysInformationButtton";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { RootState } from "../../../../store/store";
 import IDay from "../../../types/interfaces/interfaces";
+import { filterSelectedDateDataInSlicer } from "../../../../store/slicers/daysSlicer";
 
 const square_box_sx = {
   borderRadius: "16px",
@@ -39,8 +40,17 @@ const typography_design_sx = {
 };
 const TodaysInformation: React.FC = () => {
 
+  const dispatch = useDispatch()
+
+  const data_is_ready = useSelector((state:RootState)=> state.days.is_data_ready)
+
 
   const dayData = useSelector((state:RootState)=> state.days.selectedDayValue)
+if (!data_is_ready){
+        // dispatch(filterSelectedDateDataInSlicer("04-01-2023"))
+
+return <div>"loading today info..."</div>
+}
 
   const navigationLink = (address:string) => {
     const googleApiLink =  "https://www.google.com/maps/search/?api=1&query="
@@ -48,9 +58,10 @@ const TodaysInformation: React.FC = () => {
     const organizedAddress = address.split(punctRegex).join("+");
     return `${googleApiLink}${organizedAddress}`
   }
-  
+
 
   return (
+
     <>
       {/* 4 squares */}
 
@@ -131,7 +142,7 @@ const TodaysInformation: React.FC = () => {
               width={28}
               height={28}
               radius={10}
-              href={"https://www.whatsapp.com"}
+              href={`https://api.whatsapp.com/send?phone=972${dayData.mentorPhone}`}
             />
             <TodaysInformationButton
               src="./assets/Icons/buttonsIcons/calling_icon.svg"
@@ -139,9 +150,7 @@ const TodaysInformation: React.FC = () => {
               width={28}
               height={28}
               radius={10}
-              onClick={() => {
-                console.log(`calling ${dayData.mentorPhone}`);
-              }}
+              href={`tel:+972${dayData.mentorPhone}`}
             />
           </Box>
         </Box>
@@ -228,6 +237,7 @@ const TodaysInformation: React.FC = () => {
 
         {dayData.events.map((event) => {
           return (
+
             <Box
               sx={{
                 width: "98%",
@@ -235,22 +245,36 @@ const TodaysInformation: React.FC = () => {
                 px: "12px",
                 my: "4px",
                 borderRadius: "16px",
-                // backgroundColor: "#9c9fa865",
-                // boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.14);",
+                display:"flex",
+                justifyContent:"space-between",
+                alignItems:"center",
+
                 border: " 2px solid #b7b4b47b",
               }}
-            >
+
+              >
+
               <Typography
                 variant="h6"
                 sx={{ color: "white", fontWeight: "bold" }}
-              >
+                >
                 {event.eventName}
               </Typography>
+
+              <TodaysInformationButton
+              src="./assets/Icons/buttonsIcons/external_link_icon.svg"
+              padding={5}
+              width={25}
+              height={25}
+              radius={10}
+              href={`${event.link}`}
+            />
             </Box>
           );
         })}
       </Box>
     </>
+
   );
 };
 
