@@ -17,6 +17,10 @@ const square_box_sx = {
   boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25);",
   border: "0.5px solid #4e4e6056",
   position: "relative",
+  
+          "::-webkit-scrollbar": {
+            display: "none",
+          }
 };
 
 const icon_box_sx = {
@@ -43,8 +47,9 @@ const TodaysInformation: React.FC = () => {
   const dispatch = useDispatch<any>()
 
   window.addEventListener("load", function(event) {
-    dispatch(fetchAllDays());
-  });
+    (function() {
+      dispatch(fetchAllDays());
+    })();  });
 
 
 
