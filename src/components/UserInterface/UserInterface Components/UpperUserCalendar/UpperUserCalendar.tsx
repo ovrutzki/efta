@@ -21,8 +21,7 @@ const UpperUserCalendar: React.FC = () => {
 
   
   const today = dayjs().format("MM-DD-YYYY");
-  // const [selectedDate, setSelectedDay] = React.useState(today);
-  const [selectedDate, setSelectedDay] = React.useState("04-01-2023");
+  const [selectedDate, setSelectedDay] = React.useState(today);
   const [open, setOpen] = React.useState(false);
   const [month, setMonth] = React.useState<String>(dayjs().format("MMMM"));
   const [year, setYear] = React.useState<number>(dayjs().year());
