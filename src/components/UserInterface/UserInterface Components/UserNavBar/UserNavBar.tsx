@@ -15,7 +15,6 @@ const UserNavBar: React.FC = () => {
   const navigate = useNavigate()
   const userString = sessionStorage.getItem("user");
   const user = userString ? JSON.parse(userString) : null;
-console.log(user)
 
 useEffect(()=>{ if(!user){navigate("/sign-in")} },[])
 
@@ -23,13 +22,15 @@ const dispatch = useDispatch<any>()
 
 if (user){
   if (document.readyState === "complete") {
-    dispatch(fetchAllAttendance());
     dispatch(fetchAllDays());
+      dispatch(fetchAllAttendance());
+    
   } else {
     window.onload = function() {
-      dispatch(fetchAllAttendance());
       dispatch(fetchAllDays());
-    }
+      dispatch(fetchAllAttendance());
+    
+  }
   }
 
 }

@@ -1,6 +1,7 @@
 {
   "date": "",
-  "userStatus": [
+  "course_code":"",
+  "attendance": [
     {
       "studentName": "",
       "phone": "",

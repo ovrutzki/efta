@@ -6,16 +6,13 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  FormControl,
-  InputLabel,
   Slider,
-  Typography,
 } from "@mui/material";
 import axios from "axios";
 import { RootState } from "../../../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { filterSelectedDateAttendanceUser } from "../../../../store/slicers/attendanceSlicer";
-import { convertToObject } from "typescript";
+
 
 const AttendanceBar: React.FC = () => {
   const button_sx = {
@@ -97,7 +94,7 @@ const AttendanceBar: React.FC = () => {
 
 useEffect(()=>{
 
-  switch (todaysAttendance.userStatus[0].status){
+  switch (todaysAttendance.attendance[0].status){
     case Number("-1"):
       setSelectedAttendance("not_today")
       break;
@@ -106,7 +103,7 @@ useEffect(()=>{
       break;
     default:
       setSelectedAttendance("ill_be_late")
-      setSliderValue(Number(todaysAttendance.userStatus[0].status))
+      setSliderValue(Number(todaysAttendance.attendance[0].status))
       break;
   }
 

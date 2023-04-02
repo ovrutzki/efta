@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import  { IDay,IAttendance } from "../components/types/interfaces/interfaces";
+import  { IDay, IAttendance } from "../components/types/interfaces/interfaces";
 import attendanceSlicer from "./slicers/attendanceSlicer";
 import daysSlicer from "./slicers/daysSlicer";
 

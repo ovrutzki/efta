@@ -1,26 +1,16 @@
 import { Box, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { filterSelectedDateAttendanceUser } from "../../../store/slicers/attendanceSlicer";
+import { RootState } from "../../../store/store";
 import AttendanceBar from "../../UserInterface/UserInterface Components/AttendanceBar/AttendanceBar";
 import TodaysInformation from "../../UserInterface/UserInterface Components/TodaysInformation/TodaysInformation";
 import TodaysInformationButton from "../../UserInterface/UserInterface Components/TodaysInformation/TodaysInformationButtton";
 import UpperUserCalendar from "../../UserInterface/UserInterface Components/UpperUserCalendar/UpperUserCalendar";
 import UserNavBar from "../../UserInterface/UserInterface Components/UserNavBar/UserNavBar";
 
-const studentArr = [
-  { studentName: "Eran Hagever", status: 0 },
-  { studentName: "Eran Hagever", status: -1 },
-  { studentName: "Eran Hagever", status: 0.5 },
-  { studentName: "Eran Hagever", status: 0 },
-  { studentName: "Eran Hagever", status: 0.5 },
-  { studentName: "Eran Hagever", status: 0.5 },
-  { studentName: "Eran Hagever", status: 0 },
-  { studentName: "Eran Hagever", status: -1 },
-  { studentName: "Eran Hagever", status: 0 },
-  { studentName: "Eran Hagever", status: -1 },
-  { studentName: "Eran Hagever", status: 0.5 },
-];
 
 const statusBgColor = (status: number) => {
   switch (status) {
@@ -65,7 +55,7 @@ const statusDisplay = (status: number) => {
             style={{ width: "20px", height: "20px" }}
             src="./assets/Icons/attendanceBar/hurry_icon.svg"
           />
-          {`${status} hr | 10:30 AM`}
+          {`${status} hr`}
         </>
       );
   }
@@ -73,6 +63,9 @@ const statusDisplay = (status: number) => {
 
 const AdminHomePage: React.FC = () => {
 
+  const dispatch = useDispatch<any>()
+
+  const is_weekend_selected = useSelector((state:RootState)=> state.days.is_weekend)
 
   const userString = sessionStorage.getItem("user");
   const user = userString ? JSON.parse(userString) : null;
@@ -85,6 +78,16 @@ const AdminHomePage: React.FC = () => {
   } },[])
 
   const [toggleValue, setToggleValue] = useState("ALL");
+  const currentDate: string = useSelector(
+    (state: RootState) => state.days.selectedDayValue.date
+  );
+  const todaysAttendanceReady = useSelector((state:RootState)=>state.attendance.isAttendanceDataReady) 
+  
+  if (todaysAttendanceReady){
+    dispatch(filterSelectedDateAttendanceUser(currentDate))
+  }
+  const todaysAttendance = useSelector((state:RootState)=>state.attendance.selectedDayAttendanceValue.attendance) 
+
 
   const status_sx = {
     display: "flex",
@@ -108,6 +111,11 @@ const AdminHomePage: React.FC = () => {
     width: "24vw",
     letterSpacing: "0.8px",
   };
+
+
+
+
+
   return (
     <Box
       sx={{
@@ -131,6 +139,8 @@ const AdminHomePage: React.FC = () => {
         <UserNavBar />
         <UpperUserCalendar />
       </Box>
+
+      {!is_weekend_selected? <>
       <Box
         sx={{
           marginTop: "15px",
@@ -206,7 +216,7 @@ const AdminHomePage: React.FC = () => {
           justifyContent: "center",
         }}
       >
-        {studentArr
+        {todaysAttendance.filter((obj)=> Object.keys(obj).length>1)
           .filter((item) =>
             toggleValue === "SORTED" ? item.status !== 0 : true
           )
@@ -236,9 +246,7 @@ const AdminHomePage: React.FC = () => {
                     width={28}
                     height={28}
                     radius={10}
-                    onClick={() => {
-                      console.log("yes");
-                    }}
+                    href={`https://api.whatsapp.com/send?phone=972${item.phone}`}
                     shadow={false}
                   />
                 </Box>
@@ -250,7 +258,7 @@ const AdminHomePage: React.FC = () => {
             );
           })}
       </Box>
-
+</>:<Box sx={{my:"15px"}}></Box>}
       <TodaysInformation />
     </Box>
   );

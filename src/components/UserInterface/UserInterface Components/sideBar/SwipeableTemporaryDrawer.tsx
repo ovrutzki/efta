@@ -83,6 +83,7 @@ export const SwipeableTemporaryDrawer: React.FC<IOpenSideBar> = (props) => {
                   onClick={() => {
                     if (item.text === "Sync monday.com") {
                       getDataFromMonday();
+                      window.location.reload()
                       console.log("syncing monday data");
                     } else if (item.text === "Log-out") {
                         navigate("/sign-in")

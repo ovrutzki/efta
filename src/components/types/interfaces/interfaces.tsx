@@ -33,7 +33,9 @@ interface IUserStatus {
   _id: string;
 }
 
-export interface IAttendance {
+
+export interface IAttendance{
   date: string;
-  userStatus: IUserStatus[];
+  attendance: IUserStatus[];
+  course_code: string;
 }
