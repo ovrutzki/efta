@@ -46,10 +46,12 @@ const typography_design_sx = {
 const TodaysInformation: React.FC = () => {
   const dispatch = useDispatch<any>()
 
-  window.addEventListener("load", function(event) {
+  window.onload = function() {
     (function() {
       dispatch(fetchAllDays());
-    })();  });
+    })();
+  }
+  
 
 
 
