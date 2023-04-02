@@ -195,7 +195,7 @@ const UpperUserCalendar: React.FC = () => {
                   }}
                   input={<OutlinedInput label="Year" />}
                 >
-                  {[dayjs().year(), dayjs().year() + 1].map((year) => {
+                  {[dayjs().year()-1 ,dayjs().year(), dayjs().year() + 1].map((year) => {
                     return <option value={year}>{year}</option>;
                   })}
                 </Select>

@@ -63,6 +63,7 @@ const InputFieldComponent: React.FC<IInputFieldComponent> = (props) => {
       >
 
         <input
+        className="input_fields"
   onChange={(event: any) => props.setValueFunction(event?.target.value)}
   placeholder={props.placeholder}
   type={props.inputType ? props.inputType : "text"}

@@ -19,14 +19,14 @@ const SignUpLogInComponent: React.FC = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [courseAdminCode, setCourseAdminCode] = useState("");
 
-// useEffect(()=>{
-//     setEmail("")
-//     setPassword("")
-//     setFirstName("")
-//     setLastName("")
-//     setPhoneNumber("")
-//     setCourseAdminCode("")
-// },[toggleValue])
+  useEffect(() => {
+    const inputFields = document.querySelectorAll('.input_fields');   
+    inputFields.forEach(inputField => {
+      if (inputField instanceof HTMLInputElement || inputField instanceof HTMLTextAreaElement) {
+        inputField.value = '';
+      }
+    });
+  }, [toggleValue]);
 
   const button_sx = {
     display: "flex",
