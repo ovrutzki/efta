@@ -46,13 +46,16 @@ const typography_design_sx = {
 const TodaysInformation: React.FC = () => {
   const dispatch = useDispatch<any>()
 
-  window.onload = function() {
-    (function() {
-      dispatch(fetchAllDays());
-    })();
-  }
-  
 
+  console.log(document.readyState);
+  
+  if (document.readyState === "complete") {
+    dispatch(fetchAllDays());
+  } else {
+    window.onload = function() {
+      dispatch(fetchAllDays());
+    }
+  }
 
 
   const data_is_ready = useSelector((state:RootState)=> state.days.is_data_ready)
