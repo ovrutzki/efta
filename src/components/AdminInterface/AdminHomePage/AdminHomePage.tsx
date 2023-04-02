@@ -115,7 +115,7 @@ const AdminHomePage: React.FC = () => {
           width: "100%",
         }}
       >
-        <UserNavBar role="admin" />
+        <UserNavBar />
         <UpperUserCalendar />
       </Box>
       <Box

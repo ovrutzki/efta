@@ -1,38 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import * as mui from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { fetchAllDays } from "../../../../store/slicers/daysSlicer";
-
-const userString = sessionStorage.getItem("user");
-const user = userString ? JSON.parse(userString) : null;
-
-const getDataFromMonday = async () => {
-  try {
-    const response = await axios.get("https://efta-back.onrender.com/api/monday/getData",{
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${user.token}`,
-      },
-    });
-    const data = response.data;
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-interface IUserRole{
-  role:string
-}
-
-const UserNavBar: React.FC<IUserRole> = (props) => {
+import { SwipeableTemporaryDrawer } from "../sideBar/SwipeableTemporaryDrawer";
 
 
+
+
+const UserNavBar: React.FC = () => {
   const navigate = useNavigate()
-  return (
+  const userString = sessionStorage.getItem("user");
+  const user = userString ? JSON.parse(userString) : null;
+console.log(user)
+
+useEffect(()=>{ if(!user){navigate("/sign-in")} },[])
+
+
+  const [toggle, setToggle] = useState(false)
+  return (<>
     <Box
       sx={{
         height: "80px",
@@ -45,13 +31,8 @@ const UserNavBar: React.FC<IUserRole> = (props) => {
       <Box
 
         onClick={()=>{
-          getDataFromMonday()
-          if (props.role==="admin"){
-            console.log("Admin side bar")
-          }else if (props.role==="user"){
-            console.log("user side bar");
-
-          }
+          setToggle((prev)=>!prev)
+          
         }}
 
         sx={{
@@ -60,6 +41,7 @@ const UserNavBar: React.FC<IUserRole> = (props) => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          "&:hover":{cursor:"pointer"}
         }}
       >
         <img src="./assets/Icons/menu_icon.svg" />
@@ -87,11 +69,15 @@ const UserNavBar: React.FC<IUserRole> = (props) => {
           p:"4px 12px 4px 16px",
           borderRadius:"16px 0 0 16px",
           backgroundColor:"#989CA9"
-  }}>
-        <mui.Typography onClick={()=>{props.role === "admin" ? navigate("/"):navigate("/admin")}} variant="subtitle2" sx={{color:"white", fontWeight:"bold", letterSpacing:"0.5px"}}>{user.userInfo.name ? user.userInfo.name.toUpperCase(): "NAME"}</mui.Typography>
+        }}>
+        {/* <mui.Typography variant="subtitle2" sx={{color:"white", fontWeight:"bold", letterSpacing:"0.5px"}}>{user ? user.userInfo.name.toUpperCase(): "NAME"}</mui.Typography> */}
+        <mui.Typography variant="subtitle2" sx={{color:"white", fontWeight:"bold", letterSpacing:"0.5px"}}>{ "NAME"}</mui.Typography>
         </Box>
     </Box>
 
+        <SwipeableTemporaryDrawer toggle={toggle} setToggle={setToggle}/>
+
+    </>
   );
 };
 

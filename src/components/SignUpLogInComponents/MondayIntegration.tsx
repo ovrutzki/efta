@@ -10,6 +10,17 @@ const MondayIntegration: React.FC = () => {
 
     const navigate = useNavigate()
     
+  
+  useEffect(()=>{ if(!user || user.userInfo.role !== "admin"){
+    if (user.userInfo.role === "user"){
+      navigate("/")
+    }else {
+      navigate("/sign-in")
+      
+    }
+  } },[])
+
+
     const [createCourseCode, setCreateCourseCode] = useState("");
       const [boardId, setBoardId] = useState("");
       const [mondayToken, setMondayToken] = useState("");

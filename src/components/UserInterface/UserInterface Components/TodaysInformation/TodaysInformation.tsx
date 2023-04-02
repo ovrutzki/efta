@@ -44,17 +44,22 @@ const typography_design_sx = {
 
 };
 const TodaysInformation: React.FC = () => {
-  const dispatch = useDispatch<any>()
+  const userString = sessionStorage.getItem("user");
+  const user = userString ? JSON.parse(userString) : null;
 
+  const dispatch = useDispatch<any>()
 
   console.log(document.readyState);
   
-  if (document.readyState === "complete") {
-    dispatch(fetchAllDays());
-  } else {
-    window.onload = function() {
+  if (user){
+    if (document.readyState === "complete") {
       dispatch(fetchAllDays());
+    } else {
+      window.onload = function() {
+        dispatch(fetchAllDays());
+      }
     }
+
   }
 
 
@@ -65,9 +70,7 @@ const TodaysInformation: React.FC = () => {
   const dayData = useSelector((state:RootState)=> state.days.selectedDayValue)
 
 
-  const userString = sessionStorage.getItem("user");
-  const user = userString ? JSON.parse(userString) : null;
-  const navigate = useNavigate()
+
 
   const navigationLink = (address:string) => {
     const googleApiLink =  "https://www.google.com/maps/search/?api=1&query="
@@ -77,12 +80,10 @@ const TodaysInformation: React.FC = () => {
   }
 
 
-if (!user){
-  return <>
-  <div>Please sign in to view today's information.</div>
-  <mui.Button variant="contained" sx={{backgroundColor:"secondary.light"}} onClick={()=>{navigate("/sign-in")}}>Sign in</mui.Button>
-  </>
-}
+
+
+
+
 if (!data_is_ready){
 return     <>
 <style>
