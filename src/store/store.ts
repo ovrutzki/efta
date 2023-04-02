@@ -15,6 +15,7 @@ export interface RootState {
  attendance:{
   selectedDayAttendanceValue: IAttendance,
   allDaysAttendanceValue: IAttendance[],
+  isAttendanceDataReady:boolean,
  }
 }
 

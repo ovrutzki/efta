@@ -1,7 +1,11 @@
 {
   "date": "",
-  "studentName": "",
-  "phone": "",
-  "status": 1,
-  "_id": ""
+  "userStatus": [
+    {
+      "studentName": "",
+      "phone": "",
+      "status": 1,
+      "_id": ""
+    }
+  ]
 }

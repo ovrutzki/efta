@@ -13,7 +13,9 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { RootState } from "../../../../store/store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { filterSelectedDateAttendanceUser } from "../../../../store/slicers/attendanceSlicer";
+import { convertToObject } from "typescript";
 
 const AttendanceBar: React.FC = () => {
   const button_sx = {
@@ -66,13 +68,17 @@ const AttendanceBar: React.FC = () => {
     (state: RootState) => state.days.selectedDayValue.date
   );
 
-  const is_weekend_selected = useSelector((state:RootState)=> state.days.is_weekend)
+    const dispatch = useDispatch()
 
+    
+    
+    const is_weekend_selected = useSelector((state:RootState)=> state.days.is_weekend)
+    
 
   const userString = sessionStorage.getItem("user");
   const user = userString ? JSON.parse(userString) : null;
 
-  const [selectedAttendance, setSelectedAttendance] = useState("on_time");
+  const [selectedAttendance, setSelectedAttendance] = useState("");
   const [open, setOpen] = React.useState(false);
   const [sliderValue, setSliderValue] = React.useState(-1);
   const handleSliderChange = (event: any, value: any) => {
@@ -81,6 +87,31 @@ const AttendanceBar: React.FC = () => {
   const handleClickOpen = () => {
     setOpen(true);
   };
+  
+  const todaysAttendanceReady = useSelector((state:RootState)=>state.attendance.isAttendanceDataReady) 
+  
+  if (todaysAttendanceReady){
+    dispatch(filterSelectedDateAttendanceUser(currentDate))
+  }
+  const todaysAttendance = useSelector((state:RootState)=>state.attendance.selectedDayAttendanceValue) 
+
+useEffect(()=>{
+
+  switch (todaysAttendance.userStatus[0].status){
+    case Number("-1"):
+      setSelectedAttendance("not_today")
+      break;
+    case Number("0"):
+      setSelectedAttendance("on_time")
+      break;
+    default:
+      setSelectedAttendance("ill_be_late")
+      setSliderValue(Number(todaysAttendance.userStatus[0].status))
+      break;
+  }
+
+},[todaysAttendance])
+
 
   const handleClose = (
     event: React.SyntheticEvent<unknown>,

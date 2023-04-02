@@ -46,8 +46,18 @@ export const attendanceSlicer = createSlice({
   initialState: {
     selectedDayAttendanceValue: attendanceSample as IAttendance,
     allDaysAttendanceValue: [] as IAttendance[],
+    isAttendanceDataReady: false,
   },
-  reducers: {},
+  reducers: {
+    filterSelectedDateAttendanceUser: (state,action) => {
+
+      const dayToDisplayAttendance = state.allDaysAttendanceValue.find((day)=> day.date === action.payload )
+
+      if (dayToDisplayAttendance){
+          state.selectedDayAttendanceValue = dayToDisplayAttendance;
+      }
+  }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllAttendance.pending, (state) => {
@@ -55,7 +65,10 @@ export const attendanceSlicer = createSlice({
       })
       .addCase(fetchAllAttendance.fulfilled, (state, action) => {
         state.allDaysAttendanceValue = action.payload;
+        console.log(state.allDaysAttendanceValue)
         console.log("done all attendance");
+
+        state.isAttendanceDataReady = true
       })
       .addCase(fetchAllAttendance.rejected, (state, action) => {
         console.log(action.error.message);
@@ -72,5 +85,8 @@ export const attendanceSlicer = createSlice({
       });
   },
 });
+
+export const { filterSelectedDateAttendanceUser } = attendanceSlicer.actions;
+
 
 export default attendanceSlicer.reducer;

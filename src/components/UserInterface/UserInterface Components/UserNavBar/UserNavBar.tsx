@@ -4,6 +4,9 @@ import * as mui from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { SwipeableTemporaryDrawer } from "../sideBar/SwipeableTemporaryDrawer";
+import { useDispatch } from "react-redux";
+import { fetchAllAttendance } from "../../../../store/slicers/attendanceSlicer";
+import { fetchAllDays } from "../../../../store/slicers/daysSlicer";
 
 
 
@@ -15,6 +18,21 @@ const UserNavBar: React.FC = () => {
 console.log(user)
 
 useEffect(()=>{ if(!user){navigate("/sign-in")} },[])
+
+const dispatch = useDispatch<any>()
+
+if (user){
+  if (document.readyState === "complete") {
+    dispatch(fetchAllAttendance());
+    dispatch(fetchAllDays());
+  } else {
+    window.onload = function() {
+      dispatch(fetchAllAttendance());
+      dispatch(fetchAllDays());
+    }
+  }
+
+}
 
 
   const [toggle, setToggle] = useState(false)

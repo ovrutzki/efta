@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux/es/exports";
 import { RootState } from "../../../../store/store";
 import { useNavigate } from "react-router-dom";
 import { fetchAllDays } from "../../../../store/slicers/daysSlicer";
+import { fetchAllAttendance } from "../../../../store/slicers/attendanceSlicer";
 
 const square_box_sx = {
   borderRadius: "16px",
@@ -43,25 +44,7 @@ const typography_design_sx = {
   fontSize: "20px",
 
 };
-const TodaysInformation: React.FC = () => {
-  const userString = sessionStorage.getItem("user");
-  const user = userString ? JSON.parse(userString) : null;
-
-  const dispatch = useDispatch<any>()
-
-  console.log(document.readyState);
-  
-  if (user){
-    if (document.readyState === "complete") {
-      dispatch(fetchAllDays());
-    } else {
-      window.onload = function() {
-        dispatch(fetchAllDays());
-      }
-    }
-
-  }
-
+const TodaysInformation: React.FC = () => {  
 
   const data_is_ready = useSelector((state:RootState)=> state.days.is_data_ready)
   const is_weekend_selected = useSelector((state:RootState)=> state.days.is_weekend)

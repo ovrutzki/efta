@@ -20,15 +20,7 @@ export const fetchAllDays = createAsyncThunk(
 );
 
 
-export const fetchSelectedDay = createAsyncThunk(
-    "days/fetchSelectedDay",
-    async (date: string) => {
-        const userString = sessionStorage.getItem("user");
-        const user = userString ? JSON.parse(userString) : null;
-        const response = await axios.get("https://efta-back.onrender.com/api/days/getOneDay", {data: { date: date }, headers: { Authorization: `Bearer ${user.token}`,"Content-Type": "application/json" } });
-        return response.data;
-    }
-);
+
 
 export const daysSlicer = createSlice({
     name: "days",
@@ -71,13 +63,7 @@ export const daysSlicer = createSlice({
             .addCase(fetchAllDays.rejected, (state, action) => {
                 console.log(action.error.message);
             })
-            .addCase(fetchSelectedDay.pending, (state) => {})
-            .addCase(fetchSelectedDay.fulfilled, (state, action) => {
-                state.selectedDayValue = action.payload;
-            })
-            .addCase(fetchSelectedDay.rejected, (state, action) => {
-                console.log(action.error.message);
-            });
+
     },
 });
 

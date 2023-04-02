@@ -56,12 +56,10 @@ const SignUpLogInComponent: React.FC = () => {
         alert(response.data.message);
 
         if (response.data.admin && response.data.haveCourse){
-          dispatch(fetchAllDays());
           navigate("/admin")
         }else if (response.data.admin){
           navigate("/monday")
         }else{
-          dispatch(fetchAllDays());
           navigate("/")
         }
       } else {
