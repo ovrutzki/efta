@@ -262,6 +262,7 @@ const UpperUserCalendar: React.FC = () => {
                     ? "#4E4E61"
                     : is_study_day? "#989CA9" : is_weekend ? "#28746b45" : "#d956474d",
                 borderRadius: "16px",
+                "&:hover":{cursor:"pointer"}
               }}
             >
               <Typography

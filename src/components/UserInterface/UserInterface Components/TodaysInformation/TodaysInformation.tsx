@@ -19,9 +19,7 @@ const square_box_sx = {
   border: "0.5px solid #4e4e6056",
   position: "relative",
   
-          "::-webkit-scrollbar": {
-            display: "none",
-          }
+
 };
 
 const icon_box_sx = {
@@ -42,7 +40,6 @@ const typography_design_sx = {
   fontWeight: "bold",
   letterSpacing: "0.5px",
   fontSize: "20px",
-
 };
 const TodaysInformation: React.FC = () => {  
 
