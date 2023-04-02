@@ -225,7 +225,17 @@ return <Box sx={{ marginBottom:"15px",display: "flex", justifyContent: "center",
               height={50}
               radius={16}
               onClick={() => {
-                console.log(`copied ${dayData.googleMeet}`);
+
+                if (navigator.clipboard) {
+                  navigator.clipboard.writeText(dayData.googleMeet);
+                } else {
+                  let input = document.createElement("input");
+                  input.value = dayData.googleMeet;
+                  document.body.appendChild(input);
+                  input.select();
+                  document.execCommand("copy");
+                  document.body.removeChild(input);
+                }
               }}
             />
           </Box>

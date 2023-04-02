@@ -14,9 +14,7 @@ const UserHomePage: React.FC = () => {
   const user = userString ? JSON.parse(userString) : null;
 
     const navigate = useNavigate()
-    
-  console.log(user)
-  useEffect(()=>{ if(user && user.userInfo.role === "admin"){
+      useEffect(()=>{ if(user && user.userInfo.role === "admin"){
     navigate("/admin")
   } },[])
 

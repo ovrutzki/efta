@@ -47,7 +47,6 @@ export const daysSlicer = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchAllDays.pending, (state) => {
-                console.log("fetching days")
             })
             .addCase(fetchAllDays.fulfilled, (state, action) => {
                 state.allDaysDataValue = action.payload;
@@ -56,12 +55,9 @@ export const daysSlicer = createSlice({
                    dates.push(action.payload[i].date)
                 }
                 state.dates_with_data=dates
-
                 state.is_data_ready = true
-                console.log("ready")
             })
             .addCase(fetchAllDays.rejected, (state, action) => {
-                console.log(action.error.message);
             })
 
     },

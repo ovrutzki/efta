@@ -228,13 +228,9 @@ const SignUpLogInComponent: React.FC = () => {
 
         onClick={ async ()=>{
                 if (toggleValue==="log_in"){
-                  console.log(email,password)
                   logInFunction()
-
-                  console.log("log in")
                 }else{
                   signUpFunction()
-                    console.log("sign up")
                 }
 
 

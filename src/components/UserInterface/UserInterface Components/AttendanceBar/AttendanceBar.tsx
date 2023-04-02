@@ -11,7 +11,7 @@ import {
 import axios from "axios";
 import { RootState } from "../../../../store/store";
 import { useDispatch, useSelector } from "react-redux";
-import { filterSelectedDateAttendanceUser } from "../../../../store/slicers/attendanceSlicer";
+import { filterSelectedDateAttendanceUser, updateSlicer } from "../../../../store/slicers/attendanceSlicer";
 
 
 const AttendanceBar: React.FC = () => {
@@ -41,7 +41,7 @@ const AttendanceBar: React.FC = () => {
         }
       );
       if (response.status === 200) {
-        console.log(response.data.message);
+        dispatch(updateSlicer({email:user.userInfo.email,date:date,status:status}))
       } else {
         alert(response.data);
       }
@@ -119,7 +119,6 @@ useEffect(()=>{
     }
 
     updateAttendance(currentDate, toNumericValue(selectedAttendance));
-    console.log(selectedAttendance);
   };
 
   useEffect(() => {
@@ -129,7 +128,6 @@ useEffect(()=>{
     ) {
       setSliderValue(-1);
       updateAttendance(currentDate, toNumericValue(selectedAttendance));
-      console.log(selectedAttendance);
     }
   }, [selectedAttendance]);
 

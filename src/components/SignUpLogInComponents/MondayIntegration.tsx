@@ -29,9 +29,6 @@ const MondayIntegration: React.FC = () => {
       const [endingDate, setEndingDate] = useState("");
 
       const createCourseFunction = async () =>{
-
-        console.log(user.token)
-        console.log(user)
         try {
           const response = await axios.post(
             "https://efta-back.onrender.com/api/course/addingMonday",

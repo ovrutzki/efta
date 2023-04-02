@@ -194,9 +194,6 @@ const AdminHomePage: React.FC = () => {
           width={50}
           height={50}
           radius={13}
-          onClick={() => {
-            console.log("yes");
-          }}
           shadow={false}
         />
       </Box>

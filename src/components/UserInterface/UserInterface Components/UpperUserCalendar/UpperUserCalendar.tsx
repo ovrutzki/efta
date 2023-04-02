@@ -39,7 +39,6 @@ const UpperUserCalendar: React.FC = () => {
     for(let i = 0; i<daysArray.length;i++){
       if(daysArray[i][0] == selectedDate.split("-")[1]){
         if (daysArray[i][1] === "Fr" || daysArray[i][1] === "Sa" ){
-          console.log("weekend")
           dispatch(filterIsWeekend(true))
           break;
         }

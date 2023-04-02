@@ -37,7 +37,6 @@ export const SwipeableTemporaryDrawer: React.FC<IOpenSideBar> = (props) => {
         }
       );
       const data = response.data;
-      console.log(data);
     } catch (error) {
       console.error(error);
     }
@@ -84,7 +83,6 @@ export const SwipeableTemporaryDrawer: React.FC<IOpenSideBar> = (props) => {
                     if (item.text === "Sync monday.com") {
                       getDataFromMonday();
                       window.location.reload()
-                      console.log("syncing monday data");
                     } else if (item.text === "Log-out") {
                         navigate("/sign-in")
                       sessionStorage.removeItem("user");
