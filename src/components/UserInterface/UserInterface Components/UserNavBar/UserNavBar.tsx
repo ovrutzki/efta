@@ -71,7 +71,6 @@ useEffect(()=>{ if(!user){navigate("/sign-in")} },[])
           backgroundColor:"#989CA9"
         }}>
         <mui.Typography variant="subtitle2" sx={{color:"white", fontWeight:"bold", letterSpacing:"0.5px"}}>{user ? user.userInfo.name.toUpperCase(): "NAME"}</mui.Typography>
-        {/* <mui.Typography variant="subtitle2" sx={{color:"white", fontWeight:"bold", letterSpacing:"0.5px"}}>{ "NAME"}</mui.Typography> */}
         </Box>
     </Box>
 

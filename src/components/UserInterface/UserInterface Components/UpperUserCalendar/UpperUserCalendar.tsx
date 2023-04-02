@@ -16,13 +16,13 @@ import dayjs, { Dayjs } from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
 import  {filterSelectedDateDataInSlicer, filterIsWeekend} from "../../../../store/slicers/daysSlicer"
 import { RootState } from "../../../../store/store";
-import { useNavigate } from "react-router-dom";
 
 const UpperUserCalendar: React.FC = () => {
 
   
   const today = dayjs().format("MM-DD-YYYY");
-  const [selectedDate, setSelectedDay] = React.useState(today);
+  // const [selectedDate, setSelectedDay] = React.useState(today);
+  const [selectedDate, setSelectedDay] = React.useState("04-01-2023");
   const [open, setOpen] = React.useState(false);
   const [month, setMonth] = React.useState<String>(dayjs().format("MMMM"));
   const [year, setYear] = React.useState<number>(dayjs().year());
@@ -262,7 +262,7 @@ const UpperUserCalendar: React.FC = () => {
                 backgroundColor:
                   selectedDate === `${month_for_box}-${day[0]}-${year}`
                     ? "#4E4E61"
-                    : is_study_day? "#989CA9" : is_weekend ? "#989ca971" : "#d956474d",
+                    : is_study_day? "#989CA9" : is_weekend ? "#28746b45" : "#d956474d",
                 borderRadius: "16px",
               }}
             >
@@ -288,7 +288,7 @@ const UpperUserCalendar: React.FC = () => {
                 </Typography>
               </Typography>
               {is_study_day || is_weekend?<></>:<img src="./assets/Icons/no_info_icon.svg" style={{height:"20px"}}/>}
-              {is_weekend? <img src="./assets/Icons/weekend_efta_bunny.png" style={{position:"relative",top:"8px",height:"35px"}}/>  :<></>}
+              {is_weekend? <img src="./assets/Icons/holiday_icon.png" style={{height:"20px"}}/>  :<></>}
             </Box>
           );
         })}
