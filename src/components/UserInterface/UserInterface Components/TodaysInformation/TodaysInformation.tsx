@@ -106,7 +106,8 @@ Loading..
 
 if (is_weekend_selected){
 return <Box sx={{ marginBottom:"15px",display: "flex", justifyContent: "center", alignItems: "center", width: "90%", boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)", overflow: "hidden", borderRadius: "16px" }}>
-  <img src="./assets/mainBG/weekend_efta.png" style={{ objectFit: "cover", height: "100%", opacity:"90%" , marginLeft:"20px"}} />
+   Go to the beach !
+  {/* <img src="./assets/mainBG/weekend_efta.png" style={{ objectFit: "cover", height: "100%", opacity:"90%" , marginLeft:"20px"}} /> */}
 </Box>
 }
 
