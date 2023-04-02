@@ -1,6 +1,7 @@
 import { Box, Button } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import AttendanceBar from "../../UserInterface/UserInterface Components/AttendanceBar/AttendanceBar";
 import TodaysInformation from "../../UserInterface/UserInterface Components/TodaysInformation/TodaysInformation";
 import TodaysInformationButton from "../../UserInterface/UserInterface Components/TodaysInformation/TodaysInformationButtton";
@@ -71,6 +72,18 @@ const statusDisplay = (status: number) => {
 };
 
 const AdminHomePage: React.FC = () => {
+
+
+  const userString = sessionStorage.getItem("user");
+  const user = userString ? JSON.parse(userString) : null;
+
+    const navigate = useNavigate()
+    
+  
+  useEffect(()=>{ if(user && user.userInfo.role === "user"){
+    navigate("/")
+  } },[])
+
   const [toggleValue, setToggleValue] = useState("ALL");
 
   const status_sx = {

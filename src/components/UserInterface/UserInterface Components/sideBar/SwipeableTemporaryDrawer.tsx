@@ -69,7 +69,7 @@ export const SwipeableTemporaryDrawer: React.FC<IOpenSideBar> = (props) => {
     >
       <List>
         {[
-          { text: "HOME", iconLink: "./assets/logo/logo.png", function: "/" },
+          { text: "Home", iconLink: "./assets/logo/logo.png", function: "/" },
           { text: "Sync monday.com", iconLink: "./assets/Icons/buttonsIcons/monday_icon.png", function: "" },
           { text: "Change settings", iconLink: "./assets/Icons/buttonsIcons/settings_logo.png", function: "/monday" },
           { text: "Log-out", iconLink: "./assets/Icons/buttonsIcons/log_out_icon.png", function: "" },
